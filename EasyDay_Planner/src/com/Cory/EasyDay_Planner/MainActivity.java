@@ -1,4 +1,6 @@
-package com.Cory.app_idea;
+package com.Cory.EasyDay_Planner;
+
+import com.Cory.EasyDay_Planner.R;
 
 import android.os.Bundle;
 import android.app.Activity;

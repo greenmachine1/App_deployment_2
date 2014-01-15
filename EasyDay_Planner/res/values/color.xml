@@ -2,5 +2,7 @@
     <color name="black">#ff000000</color>
     <color name="blue">#ff0000ff</color>
     <color name="red">#ffff0000</color>
+    <color name="action_bar_blue">#0099cc</color>
+    <color name="drop_down_menu_white">#efefef</color>
     
 </resources>

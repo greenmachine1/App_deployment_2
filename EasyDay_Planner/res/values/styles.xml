@@ -4,6 +4,7 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
+    
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
@@ -12,10 +13,26 @@
         -->
     </style>
 
+    
+    
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        
+        <item name="android:actionBarStyle">@style/EasyTheme</item>
+        <item name="android:actionDropDownStyle">@style/DropDownMenu</item>
+        
     </style>
+    
+    <!-- Theming for the action bar -->
+    <style name="EasyTheme" parent="android:Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/action_bar_blue</item>
+        
+    </style>
+    
+    <style name="DropDownMenu" parent="android:Widget.Spinner.DropDown">
+        <item name="android:background">@color/red</item>
+        </style>
     
     
 

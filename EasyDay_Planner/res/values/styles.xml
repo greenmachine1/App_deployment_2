@@ -5,7 +5,7 @@
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     
-    <style name="AppBaseTheme" parent="android:Theme.Light">
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -25,14 +25,15 @@
     </style>
     
     <!-- Theming for the action bar -->
-    <style name="EasyTheme" parent="android:Widget.Holo.Light.ActionBar">
+    <style name="EasyTheme" parent="android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/action_bar_blue</item>
         
     </style>
     
-    <style name="DropDownMenu" parent="android:Widget.Spinner.DropDown">
+    <style name="DropDownMenu" parent="android:style/Widget.Holo.ActionBar">
         <item name="android:background">@color/red</item>
-        </style>
+        <item name="android:textColor">@color/black</item>
+    </style>
     
     
 

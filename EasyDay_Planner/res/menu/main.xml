@@ -1,9 +1,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/add_event"
+        android:showAsAction="always"
+        android:icon="@drawable/greenmachine_edp_icon"
+        android:title="@string/add_event"/>
+    
+    <item
+        android:id="@+id/search_overflow"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:title="@string/search"/>
+    <item
+        android:id="@+id/about_this_app_overflow"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/about_this_app"/>
 
 </menu>

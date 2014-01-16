@@ -5,5 +5,7 @@
     android:orientation="vertical" 
     android:background="@drawable/background_blue_gradient">
     
+    
+  
 
 </LinearLayout>

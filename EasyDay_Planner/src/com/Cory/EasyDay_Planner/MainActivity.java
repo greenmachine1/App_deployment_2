@@ -4,9 +4,13 @@ import com.Cory.EasyDay_Planner.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListFragment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
@@ -14,8 +18,10 @@ public class MainActivity extends Activity {
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+    	 super.onCreate(savedInstanceState);
+    	 
+    	 // calling on my list view fragment
+         setContentView(R.layout.listview_fragment);
         
         
         
@@ -24,7 +30,7 @@ public class MainActivity extends Activity {
         
     }
 
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -63,5 +69,6 @@ public class MainActivity extends Activity {
     	}
     	
     }
+    
     
 }

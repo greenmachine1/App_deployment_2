@@ -5,6 +5,8 @@ import com.Cory.EasyDay_Planner.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListFragment;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +16,7 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
-	
+	Context _context;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,7 @@ public class MainActivity extends Activity {
     	 // calling on my list view fragment
          setContentView(R.layout.main);
         
-        
+        _context = this;
         
         
         
@@ -53,15 +55,27 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item){
 		
     	switch (item.getItemId()){
+    	
+    	// what to do when the add event icon is selected 
     	case R.id.add_event:
-    		Log.i("Action bar", "add button selected");
+    		
+    		Intent addEventIntent = new Intent(this, New_Event.class);
+			startActivity(addEventIntent);
+			
     		return true;
     	
+    	// what to do when the search overflow is selected
     	case R.id.search_overflow:
     		Log.i("Action bar", "Search button selected");
     		return true;
+    		
+    		
+    	// what to do when the about this app overflow is selected	
     	case R.id.about_this_app_overflow:
-    		Log.i("Action bar", "about this app button selected");
+    		
+    		Intent aboutThisAppIntent = new Intent(this, About_This_App.class);
+			startActivity(aboutThisAppIntent);
+			
     		return true;
     		
     		default:

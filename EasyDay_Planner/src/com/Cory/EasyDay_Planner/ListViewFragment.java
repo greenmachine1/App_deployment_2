@@ -15,9 +15,7 @@ public class ListViewFragment extends ListFragment{
 
 	// my string array
 	String[] values;
-	String[] secondValues;
 
-	ListView listView;
 	
 	@Override
 	  public void onActivityCreated(Bundle savedInstanceState) {
@@ -25,15 +23,12 @@ public class ListViewFragment extends ListFragment{
 	    
 	    // creating an array of things
 	    values = new String[] { "Grant Break", "Pick up son from School", "Go to break"};
-	    secondValues = new String[] { "15 minute", "at 3", "at 6"};
 	    
 	    
 	    // setting an array adapter
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 	        android.R.layout.simple_expandable_list_item_1, values);
-
-	   
-	   
+	    
 	    // setting the adapter to the list
 	    setListAdapter(adapter);
 	  }

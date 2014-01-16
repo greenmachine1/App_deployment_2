@@ -26,10 +26,7 @@ public class MainActivity extends Activity {
          setContentView(R.layout.main);
         
         _context = this;
-        
-        
-        
-        
+
     }
 
     
@@ -42,14 +39,7 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    
 
-    
-    
-    
-    
-    
-    
     // Action bar selection handler
     @Override
     public boolean onOptionsItemSelected(MenuItem item){

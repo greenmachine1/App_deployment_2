@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@drawable/background_blue_gradient">
-    
-    
-  
+    android:background="@drawable/background_blue_gradient"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/android:list"
+        android:name="com.Cory.EasyDay_Planner.ListViewFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dip"
+        tools:layout="@android:layout/list_content" >
+    </fragment>
 
 </LinearLayout>

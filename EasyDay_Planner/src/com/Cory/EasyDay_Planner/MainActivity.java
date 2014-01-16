@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
     	 super.onCreate(savedInstanceState);
     	 
     	 // calling on my list view fragment
-         setContentView(R.layout.listview_fragment);
+         setContentView(R.layout.main);
         
         
         

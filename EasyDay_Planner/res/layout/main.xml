@@ -6,13 +6,36 @@
     android:background="@drawable/background_blue_gradient"
     android:orientation="vertical" >
 
-    <fragment
+    
+    <fragment 
         android:id="@+id/frag"
-        android:name="com.Cory.EasyDay_Planner.ListViewFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dip"
-        tools:layout="@android:layout/list_content" >
+	        android:name="com.Cory.EasyDay_Planner.ListViewFragment"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_marginTop="100dip"
+	        tools:layout="@android:layout/list_content" >
+	        
     </fragment>
+    
+   
+    
+    <!--  
+	      <ListView
+	        android:id="@id/android:list"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:background="@color/blue" >  
+	    </ListView>
+	    
+	    
+	        -->
 
 </LinearLayout>
+
+<!-- android:id="@id/android:list"
+	        android:name="com.Cory.EasyDay_Planner.ListViewFragment"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_marginTop="100dip"
+	        tools:layout="@android:layout/list_content" >
+	         -->

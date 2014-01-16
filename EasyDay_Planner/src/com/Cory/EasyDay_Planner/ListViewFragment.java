@@ -4,8 +4,11 @@ import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView.FindListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class ListViewFragment extends ListFragment{
@@ -13,6 +16,8 @@ public class ListViewFragment extends ListFragment{
 	// my string array
 	String[] values;
 	String[] secondValues;
+
+	ListView listView;
 	
 	@Override
 	  public void onActivityCreated(Bundle savedInstanceState) {
@@ -26,9 +31,9 @@ public class ListViewFragment extends ListFragment{
 	    // setting an array adapter
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 	        android.R.layout.simple_expandable_list_item_1, values);
-	    
-	    
-	    
+
+	   
+	   
 	    // setting the adapter to the list
 	    setListAdapter(adapter);
 	  }

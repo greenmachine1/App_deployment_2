@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
     	// what to do when the add event icon is selected 
     	case R.id.add_event:
     		
-    		Intent addEventIntent = new Intent(this, New_Event.class);
+    		Intent addEventIntent = new Intent(_context, New_Event.class);
 			startActivity(addEventIntent);
 			
     		return true;
@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
     	// what to do when the about this app overflow is selected	
     	case R.id.about_this_app_overflow:
     		
-    		Intent aboutThisAppIntent = new Intent(this, About_This_App.class);
+    		Intent aboutThisAppIntent = new Intent(_context, About_This_App.class);
 			startActivity(aboutThisAppIntent);
 			
     		return true;

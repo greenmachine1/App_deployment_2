@@ -7,35 +7,19 @@
     android:orientation="vertical" >
 
     
-    <fragment 
-        android:id="@+id/frag"
+    <ListView 
+
+        	android:id="@android:id/list"
 	        android:name="com.Cory.EasyDay_Planner.ListViewFragment"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
-	        android:layout_marginTop="100dip"
-	        tools:layout="@android:layout/list_content" >
+	        android:layout_marginTop="100dip">
 	        
-    </fragment>
+    </ListView>
     
-   
-    
-    <!--  
-	      <ListView
-	        android:id="@id/android:list"
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"
-	        android:background="@color/blue" >  
-	    </ListView>
-	    
-	    
-	        -->
+
 
 </LinearLayout>
 
-<!-- android:id="@id/android:list"
-	        android:name="com.Cory.EasyDay_Planner.ListViewFragment"
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"
-	        android:layout_marginTop="100dip"
-	        tools:layout="@android:layout/list_content" >
-	         -->
+
+	         

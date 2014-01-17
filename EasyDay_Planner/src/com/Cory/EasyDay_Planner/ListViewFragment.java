@@ -13,24 +13,16 @@ import android.widget.TextView;
 
 public class ListViewFragment extends ListFragment{
 
-	// my string array
-	String[] values;
-
 	
 	@Override
 	  public void onActivityCreated(Bundle savedInstanceState) {
 	    super.onActivityCreated(savedInstanceState);
-	    
-	    // creating an array of things
-	    values = new String[] { "Grant Break", "Pick up son from School", "Go to break"};
+
 	    
 	    
-	    // setting an array adapter
-	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-	        android.R.layout.simple_expandable_list_item_1, values);
 	    
-	    // setting the adapter to the list
-	    setListAdapter(adapter);
+	    
+	    
 	  }
 
 	
@@ -38,8 +30,9 @@ public class ListViewFragment extends ListFragment{
 	  @Override
 	  public void onListItemClick(ListView l, View v, int position, long id) {
 	    // do something with the data
+
 		  
-		  Log.i("touched at position ", "" + values[position]);
+		  
 
 	  }
 

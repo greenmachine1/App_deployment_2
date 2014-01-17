@@ -1,14 +1,14 @@
 package com.Cory.EasyDay_Planner;
 
+
+
 import android.app.ListFragment;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
-import android.webkit.WebView.FindListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+
 import android.widget.ListView;
-import android.widget.TextView;
+
 
 
 public class ListViewFragment extends ListFragment{
@@ -18,8 +18,20 @@ public class ListViewFragment extends ListFragment{
 	  public void onActivityCreated(Bundle savedInstanceState) {
 	    super.onActivityCreated(savedInstanceState);
 
+	    Event_With_Custom_Adapter EWCA_data[] = new Event_With_Custom_Adapter[]{
+	    		new Event_With_Custom_Adapter(R.drawable.go_icon, "Cloudy", "In California"),
+	    		new Event_With_Custom_Adapter(R.drawable.stop_icon, "Cloudy", "In California"),
+	    		new Event_With_Custom_Adapter(R.drawable.go_icon, "Cloudy", "In California"),
+	    		new Event_With_Custom_Adapter(R.drawable.go_icon, "Cloudy", "In California")
+	    };
 	    
 	    
+	    CustomAdapter adapter = new CustomAdapter(getActivity(), R.layout.listview_fragment_layout, EWCA_data);
+		
+	    
+	    
+	    
+		setListAdapter(adapter);
 	    
 	    
 	    

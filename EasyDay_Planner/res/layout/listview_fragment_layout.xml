@@ -14,7 +14,7 @@
         android:layout_marginRight="15dp"/>
     
     <TextView 
-        android:id="@+id/txtTitle"
+        android:id="@+id/txt_title"
         android:layout_width="fill_parent"
         android:layout_height="20dip"
         android:layout_toRightOf="@id/icon"
@@ -25,11 +25,11 @@
         android:text="second Line"/>
     
     <TextView 
-        android:id="@+id/txtExtra"
+        android:id="@+id/txt_extra"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/icon"
-        android:layout_below="@id/txtTitle"
+        android:layout_below="@id/txt_title"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignWithParentIfMissing="true"

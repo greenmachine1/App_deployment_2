@@ -42,22 +42,25 @@ public class ListFragment extends Fragment {
 		// inflating the elements_list_fragment xml
 		view = inflater.inflate(R.layout.elements_list_fragment, container, false);
 		
-		
-		
+	
+		// this info is just temporary
 		String[] elements = {"First", "Second", "Third", "fourth", "fifth", "sixth", "seventh"};
 		
 		// Targeting the elements list
 		elementsListView = (ListView)view.findViewById(R.id.elements_list);
 		
-		
+		String[] firstRowElements = {"Grant Break", "Take a break at 12:15pm", "Do Laundry by 5pm", "Take Fido out for a walk", "Pick up Son at 7pm" };
+		String[] secondRowElements = {"13:25 Left", "Alarm set for 10 minutes prior", "Alarm set for 1 hour prior", "At some point walk the dog", "Alarm set for 10 minutes prior"};
 		
 		// my custom array
 		Events_List_Adapter events_data[] = new Events_List_Adapter[]{
 				
-				new Events_List_Adapter(R.drawable.go_icon, "First", " 1 "),
-				new Events_List_Adapter(R.drawable.go_icon, "Second", " 2 "),
-				new Events_List_Adapter(R.drawable.go_icon, "Third", " 3 "),
-				new Events_List_Adapter(R.drawable.go_icon, "Forth", " 4 ")
+				// icon, main title, then secondary info
+				new Events_List_Adapter(R.drawable.stop_icon, firstRowElements[0], secondRowElements[0]),
+				new Events_List_Adapter(R.drawable.go_icon, firstRowElements[1], secondRowElements[1]),
+				new Events_List_Adapter(R.drawable.go_icon, firstRowElements[2], secondRowElements[2]),
+				new Events_List_Adapter(R.drawable.go_icon, firstRowElements[3], secondRowElements[3]),
+				new Events_List_Adapter(R.drawable.go_icon, firstRowElements[4], secondRowElements[4])
 				
 		};
 		

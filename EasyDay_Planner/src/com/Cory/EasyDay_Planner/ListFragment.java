@@ -49,20 +49,22 @@ public class ListFragment extends Fragment {
 		// Targeting the elements list
 		elementsListView = (ListView)view.findViewById(R.id.elements_list);
 		
-		// array adapter
-		//adapter= new ArrayAdapter<String>(_context, R.layout.elements_row_layout,R.id.elements_list_text, elements);
 		
+		
+		// my custom array
 		Events_List_Adapter events_data[] = new Events_List_Adapter[]{
 				
-				new Events_List_Adapter(R.drawable.go_icon, "First", "second information"),
-				new Events_List_Adapter(R.drawable.go_icon, "Second", "second information"),
-				new Events_List_Adapter(R.drawable.go_icon, "Third", "second information"),
-				new Events_List_Adapter(R.drawable.go_icon, "Forth", "second information")
+				new Events_List_Adapter(R.drawable.go_icon, "First", " 1 "),
+				new Events_List_Adapter(R.drawable.go_icon, "Second", " 2 "),
+				new Events_List_Adapter(R.drawable.go_icon, "Third", " 3 "),
+				new Events_List_Adapter(R.drawable.go_icon, "Forth", " 4 ")
 				
 		};
 		
+		// the adapter
 		adapter = new CustomAdapter(_context,R.layout.elements_row_layout, events_data);
 		
+		// setting the adapter to the list
 		elementsListView.setAdapter(adapter);
 		
 		return view;

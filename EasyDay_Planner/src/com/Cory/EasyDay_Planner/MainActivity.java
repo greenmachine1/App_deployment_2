@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
 	Context _context;
 	
@@ -29,6 +30,14 @@ public class MainActivity extends Activity {
 
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

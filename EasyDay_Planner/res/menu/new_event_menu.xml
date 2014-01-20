@@ -2,7 +2,7 @@
 
     <item
         android:id="@+id/done_icon"
-        android:icon="@drawable/plus_icon"
+        android:icon="@drawable/accept_icon"
         android:showAsAction="always"/>
 	
 </menu>

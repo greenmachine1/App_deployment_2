@@ -2,6 +2,8 @@ package com.Cory.EasyDay_Planner;
 
 import org.json.JSONObject;
 
+import com.Cory.FileManager.FileManager;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -30,6 +32,12 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 	String selectedItemFromCategory;
 	
 	Context _context;
+	
+	// my file name for saving and editing
+	String fileName = "json.txt";
+	
+	// for saving files
+	FileManager newFileManager;
 
 
 	
@@ -38,6 +46,8 @@ public class New_Event extends Activity implements OnItemSelectedListener{
     	 super.onCreate(savedInstanceState);
     	 
     	 _context = this;
+    	 
+    	 newFileManager = new FileManager();
     	 
     	 // calling on my list view fragment
          setContentView(R.layout.new_event_layout);
@@ -185,6 +195,10 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 		}
 		
 		Log.i("object contains", jsonObject.toString());
+		
+		// writing the json object to file
+		newFileManager.writeStringFile(this, fileName, jsonObject.toString());
+		
 	}
 
 

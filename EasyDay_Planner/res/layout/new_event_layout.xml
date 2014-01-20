@@ -1,9 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_blue_gradient"
     android:orientation="vertical" >
-    
 
-</LinearLayout>
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="56dp"
+        android:ems="10" 
+        android:hint="Name of Event">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editText1"
+        android:ems="10" 
+        android:hint="Set a Note"/>
+
+    <Spinner
+        android:id="@+id/category_spinner"
+        android:layout_width="400dip"
+        android:layout_height="50dip"
+        android:layout_below="@+id/editText2"
+        android:prompt="@string/hello_world" />
+
+    <Button
+        android:id="@+id/alarm_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="Set an Alarm" />
+
+    <Button
+        android:id="@+id/time_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/alarm_set"
+        android:text="Set a Time" />
+
+</RelativeLayout>

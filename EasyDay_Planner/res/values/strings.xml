@@ -9,5 +9,14 @@
     <string name="about_this_app">About this App</string>
     
     <string name="hello_world">Hello world!</string>
+    
+    <string-array name="category_array_list">
+    	<item>Category</item>
+    	<item>Home</item>
+    	<item>Work</item>
+    	<item>School</item>
+    	<item>Other</item>    
+        
+    </string-array>
 
 </resources>

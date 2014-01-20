@@ -56,6 +56,7 @@ public class ListFragment extends Fragment {
 		Events_List_Adapter events_data[] = new Events_List_Adapter[]{
 				
 				// icon, main title, then secondary info
+				
 				new Events_List_Adapter(R.drawable.stop_icon, firstRowElements[0], secondRowElements[0]),
 				new Events_List_Adapter(R.drawable.go_icon, firstRowElements[1], secondRowElements[1]),
 				new Events_List_Adapter(R.drawable.go_icon, firstRowElements[2], secondRowElements[2]),

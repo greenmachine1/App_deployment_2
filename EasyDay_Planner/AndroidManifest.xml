@@ -22,8 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="New_Event"></activity>
-        <activity android:name="About_This_App"></activity>
+        <activity android:name="New_Event"
+            android:label="New Event"/>
+        <activity android:name="About_This_App"
+            android:label="About This App"/>
     </application>
 
 </manifest>

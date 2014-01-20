@@ -17,7 +17,7 @@
         android:paddingBottom="20dp"/>
 	
 	<TextView 
-	    android:id="@+id/second_row"
+	    android:id="@+id/txtTitle"
         android:layout_width="fill_parent"
         android:layout_height="70dip"
         android:layout_alignParentTop="true"
@@ -29,13 +29,13 @@
         android:ellipsize="marquee" />
 	
 	<TextView 
-	    android:id="@+id/txtTitle"
+	    android:id="@+id/second_row"
         android:layout_width="fill_parent"
         android:layout_height="40dip"
         android:gravity="center_vertical"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_above="@id/second_row"
+        android:layout_above="@id/txtTitle"
         android:layout_toRightOf="@id/imgIcon"
         android:layout_alignWithParentIfMissing="true"
         android:textSize="18sp"

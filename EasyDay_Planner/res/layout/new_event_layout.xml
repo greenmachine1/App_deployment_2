@@ -7,52 +7,51 @@
     android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/event_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="56dp"
-        android:ems="10" 
-        android:hint="Name of Event">
-
-        <requestFocus />
-    </EditText>
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="Name of Event" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/event_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText1"
-        android:ems="10" 
-        android:hint="Set a Note"/>
+        android:layout_below="@+id/event_name"
+        android:ems="10"
+        android:hint="Set a Note" />
 
     <Spinner
         android:id="@+id/category_spinner"
         android:layout_width="400dip"
         android:layout_height="50dip"
-        android:layout_below="@+id/editText2"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/event_note"
         android:prompt="@string/hello_world" />
 
     <Button
-        android:id="@+id/alarm_set"
+        android:id="@+id/alarm_set_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_below="@+id/category_spinner"
         android:text="Set an Alarm" />
 
     <Button
-        android:id="@+id/time_set"
+        android:id="@+id/time_set_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/alarm_set"
+        android:layout_below="@+id/alarm_set_button"
         android:text="Set a Time" />
 
 </RelativeLayout>

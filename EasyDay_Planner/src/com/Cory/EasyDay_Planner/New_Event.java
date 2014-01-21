@@ -1,5 +1,8 @@
 package com.Cory.EasyDay_Planner;
 
+import java.io.File;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.Cory.FileManager.FileManager;
@@ -38,6 +41,9 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 	
 	// for saving files
 	FileManager newFileManager;
+	
+	JSONObject mainObject;
+	JSONArray mainObjectArray;
 
 
 	
@@ -48,6 +54,11 @@ public class New_Event extends Activity implements OnItemSelectedListener{
     	 _context = this;
     	 
     	 newFileManager = new FileManager();
+    	 
+    	 mainObject = new JSONObject();
+    	 mainObjectArray = new JSONArray();
+    	 
+    	 
     	 
     	 // calling on my list view fragment
          setContentView(R.layout.new_event_layout);
@@ -181,23 +192,86 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 	
 	// writing the json data
 	public void writeJson(){
+				
+		// the subobject for the main object array
+		JSONObject nameOfJsonObject = new JSONObject();
+		
+		// sub sub object of the main object array
 		JSONObject jsonObject = new JSONObject();
 		
-		try{
+			// writing the json object to file
+			File file = this.getFileStreamPath(fileName);
 			
-			jsonObject.put("name_of_event", nameOfEvent.getText().toString());
-			jsonObject.put("note_for_event", noteText.getText().toString());
-			jsonObject.put("category", selectedItemFromCategory.toString());
-			
-		}catch(Exception e){
-			//e.printStackTrace();
-			Log.e("error", e.getMessage().toString());
-		}
-		
-		Log.i("object contains", jsonObject.toString());
-		
-		// writing the json object to file
-		newFileManager.writeStringFile(this, fileName, jsonObject.toString());
+			// portion adds to the exsisting json file
+			if(file.exists()){
+				Log.i("It is", "There");
+				
+				// opening up of the json file
+				String JSONString = newFileManager.readStringFile(_context, fileName);
+				
+				// converting the file into json objects and arrays
+				JSONObject mainObject = new JSONObject();
+				JSONArray mainArrayObject = new JSONArray();
+				try{
+					
+					mainObject = new JSONObject(JSONString);
+					
+					mainArrayObject = mainObject.getJSONArray("main");
+					
+					jsonObject.put("name_of_event", nameOfEvent.getText().toString());
+					jsonObject.put("note_for_event", noteText.getText().toString());
+					jsonObject.put("category", selectedItemFromCategory.toString());
+					
+					// putting all the elements into a json object...
+					nameOfJsonObject.put(nameOfEvent.getText().toString(), jsonObject);
+					
+					// ...then putting that object into the main array...
+					mainArrayObject.put(nameOfJsonObject);
+					
+					// ... then putting that object into the main encapsulating
+					// object.
+					mainObject.put("main", mainArrayObject);
+					
+					
+					
+				}catch(Exception e){
+					Log.e("error", e.getMessage().toString());
+				}
+				
+				
+				
+				// writing it all to a file
+				newFileManager.writeStringFile(this, fileName, mainObject.toString());
+				
+				
+			// if the file does not exist, make the file and put in info	
+			}else if(!(file.exists())){
+				
+				try{
+					
+					jsonObject.put("name_of_event", nameOfEvent.getText().toString());
+					jsonObject.put("note_for_event", noteText.getText().toString());
+					jsonObject.put("category", selectedItemFromCategory.toString());
+					
+					// putting all the elements into a json object...
+					nameOfJsonObject.put(nameOfEvent.getText().toString(), jsonObject);
+					
+					// ...then putting that object into the main array...
+					mainObjectArray.put(nameOfJsonObject);
+					
+					// ... then putting that object into the main encapsulating
+					// object.
+					mainObject.put("main", mainObjectArray);
+					
+				}catch(Exception e){
+					//e.printStackTrace();
+					Log.e("error", e.getMessage().toString());
+				}
+
+				// writing it all to a file				
+				newFileManager.writeStringFile(this, fileName, mainObject.toString());
+				
+			}
 		
 	}
 

@@ -21,7 +21,6 @@ public class MainActivity extends FragmentActivity {
 
 	Context _context;
 	
-	String fileName = "json.txt";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {

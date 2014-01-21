@@ -70,7 +70,7 @@ public class New_Event extends Activity implements OnItemSelectedListener{
          nameOfEvent = (EditText)findViewById(R.id.event_name);
          noteText = (EditText)findViewById(R.id.event_note);
          
-         
+
          // setting the alarm button click listener
          setAnAlarmButton.setOnClickListener(new OnClickListener(){
 
@@ -96,6 +96,9 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 			}
         	 
          });
+         
+         
+         
          
          
          
@@ -133,8 +136,6 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 		String[] categoryArray = {"Home","Home", "Work", "School", "Other"};
 		
 		selectedItemFromCategory = categoryArray[position].toString();
-		
-		Log.i("category", selectedItemFromCategory);
 		
 	}
 
@@ -190,6 +191,9 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 	
 	
 	
+    
+    
+    
 	// writing the json data
 	public void writeJson(){
 				
@@ -238,10 +242,11 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 					Log.e("error", e.getMessage().toString());
 				}
 				
-				
-				
+			
 				// writing it all to a file
 				newFileManager.writeStringFile(this, fileName, mainObject.toString());
+				
+				
 				
 				
 			// if the file does not exist, make the file and put in info	

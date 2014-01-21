@@ -16,6 +16,8 @@ public class ListFragment extends Fragment {
 	CustomAdapter adapter;
 	
 	Context _context;
+	
+	String fileName;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

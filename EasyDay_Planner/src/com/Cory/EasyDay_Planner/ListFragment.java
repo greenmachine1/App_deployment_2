@@ -1,8 +1,17 @@
 package com.Cory.EasyDay_Planner;
 
+import java.io.File;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.Cory.FileManager.FileManager;
+
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +26,32 @@ public class ListFragment extends Fragment {
 	
 	Context _context;
 	
-	String fileName;
+	String fileName = "json.txt";
+	
+	FileManager fileManager;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
+		
+		fileManager = new FileManager();
+		
+		// getting the file json.txt
+		File file = getActivity().getFileStreamPath(fileName);
+		
+		// if it exists...
+		if(file.exists()){
+			
+			// ... load the json data
+			loadJsonData();
+			
+		// ... and if it doesnt	
+		}else if(!(file.exists())){
+			
+		}
+		
+		
 	}
 
 
@@ -31,10 +60,63 @@ public class ListFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	}
+	
+	
+	
+	
+	
+	// loads in the json data from the file
+	public void loadJsonData(){
+		
+		// reading the file and putting it into json format
+		String JSONString = fileManager.readStringFile(getActivity(), fileName);
+
+		try{
+			
+			JSONObject mainJsonObject = new JSONObject(JSONString);
+			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+			
+			Log.i("The contents of the file are", mainJsonArray.toString());
+			
+		}catch(Exception e){
+			
+		}
+		
+		
+		
+		
+	}
+	
+	
+	// when the activity comes back into focus, it brings back up the contents of the file
+	// and loads them back into json format
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		
+		// getting the file json.txt
+		File file = getActivity().getFileStreamPath(fileName);
+				
+		// if it exists...
+		if(file.exists()){
+					
+			// ... load the json data
+			loadJsonData();
+					
+		// ... and if it doesnt	
+		}else if(!(file.exists())){
+					
+		}
+		
+	}
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		Log.i("OnCreateView for fragment", "Got created");
 		
 		_context = getActivity();
 		

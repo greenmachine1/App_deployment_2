@@ -32,15 +32,7 @@ public class MainActivity extends FragmentActivity {
         
         _context = this;
         
-        // this is meant to clear out the json.txt at the end of the day.
-        File file = this.getFileStreamPath(fileName);
         
-        if(file.exists()){
-        	
-        }
-        else if(!(file.exists())){
-        	
-        }
 
     }
 

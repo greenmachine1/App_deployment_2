@@ -1,5 +1,7 @@
 package com.Cory.EasyDay_Planner;
 
+import java.io.File;
+
 import com.Cory.EasyDay_Planner.R;
 
 import android.os.Bundle;
@@ -19,6 +21,8 @@ public class MainActivity extends FragmentActivity {
 
 	Context _context;
 	
+	String fileName = "json.txt";
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	 super.onCreate(savedInstanceState);
@@ -27,6 +31,16 @@ public class MainActivity extends FragmentActivity {
          setContentView(R.layout.main);
         
         _context = this;
+        
+        // this is meant to clear out the json.txt at the end of the day.
+        File file = this.getFileStreamPath(fileName);
+        
+        if(file.exists()){
+        	
+        }
+        else if(!(file.exists())){
+        	
+        }
 
     }
 

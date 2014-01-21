@@ -25,7 +25,7 @@
         <activity android:name="New_Event"
             android:label="New Event"/>
         <activity android:name="About_This_App"
-            android:label="About This App"/>
+            android:label="About"/>
     </application>
 
 </manifest>

@@ -227,7 +227,7 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 					jsonObject.put("category", selectedItemFromCategory.toString());
 					
 					// putting all the elements into a json object...
-					nameOfJsonObject.put(nameOfEvent.getText().toString(), jsonObject);
+					nameOfJsonObject.put("" + mainArrayObject.length(), jsonObject);
 					
 					// ...then putting that object into the main array...
 					mainArrayObject.put(nameOfJsonObject);
@@ -259,7 +259,7 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 					jsonObject.put("category", selectedItemFromCategory.toString());
 					
 					// putting all the elements into a json object...
-					nameOfJsonObject.put(nameOfEvent.getText().toString(), jsonObject);
+					nameOfJsonObject.put("" + mainObjectArray.length(), jsonObject);
 					
 					// ...then putting that object into the main array...
 					mainObjectArray.put(nameOfJsonObject);

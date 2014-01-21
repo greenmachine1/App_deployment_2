@@ -29,6 +29,8 @@ public class ListFragment extends Fragment {
 	String fileName = "json.txt";
 	
 	FileManager fileManager;
+	
+	String JsonString;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class ListFragment extends Fragment {
 		
 		// getting the file json.txt
 		File file = getActivity().getFileStreamPath(fileName);
+		
 		
 		// if it exists...
 		if(file.exists()){
@@ -64,30 +67,6 @@ public class ListFragment extends Fragment {
 	
 	
 	
-	
-	// loads in the json data from the file
-	public void loadJsonData(){
-		
-		// reading the file and putting it into json format
-		String JSONString = fileManager.readStringFile(getActivity(), fileName);
-
-		try{
-			
-			JSONObject mainJsonObject = new JSONObject(JSONString);
-			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
-			
-			Log.i("The contents of the file are", mainJsonArray.toString());
-			
-		}catch(Exception e){
-			
-		}
-		
-		
-		
-		
-	}
-	
-	
 	// when the activity comes back into focus, it brings back up the contents of the file
 	// and loads them back into json format
 	@Override
@@ -110,6 +89,49 @@ public class ListFragment extends Fragment {
 		}
 		
 	}
+	
+	
+	
+	
+	
+	// loads in the json data from the file
+	public void loadJsonData(){
+		
+		// reading the file and putting it into json format
+		JsonString = fileManager.readStringFile(getActivity(), fileName);
+
+		try{
+			
+			JSONObject mainJsonObject = new JSONObject(JsonString);
+			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+			
+			Log.i("The contents of the file are", mainJsonArray.toString());
+			
+			
+				
+				//String artistName = results.getJSONObject(0).getString("artistName").toString();
+			for(int i = 0; i < mainJsonArray.length(); i ++){
+				
+				JSONObject c = mainJsonArray.getJSONObject(i);
+				
+				JSONObject nameOfEvent = c.getJSONObject("" + i);
+				
+				String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
+				
+				Log.i("name of event", nameOfEventString);	
+			}
+			
+		}catch(Exception e){
+			
+		}
+		
+		
+		
+		
+	}
+	
+	
+
 
 
 	@Override
@@ -125,9 +147,7 @@ public class ListFragment extends Fragment {
 		// inflating the elements_list_fragment xml
 		view = inflater.inflate(R.layout.elements_list_fragment, container, false);
 		
-	
 
-		
 		// Targeting the elements list
 		elementsListView = (ListView)view.findViewById(R.id.elements_list);
 		

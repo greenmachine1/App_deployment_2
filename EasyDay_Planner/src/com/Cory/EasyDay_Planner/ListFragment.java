@@ -9,6 +9,7 @@ import com.Cory.FileManager.FileManager;
 
 import android.app.Activity;
 import android.content.Context;
+import android.location.Address;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -32,11 +33,10 @@ public class ListFragment extends Fragment {
 	
 	String JsonString;
 	
-	String nameOfEventString;
-	String noteForEventString;
+
 	
-	String[] firstRowElements = {""/*"Grant Break", "Take a break at 12:15pm", "Do Laundry by 5pm", "Take Fido out for a walk", "Pick up Son at 7pm"*/};
-	String[] secondRowElements = {"" /*"13:25 Left", "Alarm set for 10 minutes prior", "Alarm set for 1 hour prior", "At some point walk the dog", "Alarm set for 10 minutes prior" */};
+	String[] firstRowElements = {"Grant Break", "Take a break at 12:15pm", "Do Laundry by 5pm", "Take Fido out for a walk", "Pick up Son at 7pm"};
+	String[] secondRowElements = {"13:25 Left", "Alarm set for 10 minutes prior", "Alarm set for 1 hour prior", "At some point walk the dog", "Alarm set for 10 minutes prior" };
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -92,6 +92,7 @@ public class ListFragment extends Fragment {
 					
 			// ... load the json data
 			loadJsonData();
+			
 					
 		// ... and if it doesnt	
 		}else if(!(file.exists())){
@@ -117,9 +118,9 @@ public class ListFragment extends Fragment {
 			
 			Log.i("The contents of the file are", mainJsonArray.toString());
 			
+			Log.i("elements of the mainJsonArray", "" + mainJsonArray.length());
 			
-				
-				//String artistName = results.getJSONObject(0).getString("artistName").toString();
+			
 			for(int i = 0; i < mainJsonArray.length(); i ++){
 				
 				JSONObject c = mainJsonArray.getJSONObject(i);
@@ -129,19 +130,23 @@ public class ListFragment extends Fragment {
 				String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
 				String noteForEventString = nameOfEvent.getString("note_for_event").toString();
 				
+				// storing the elements
 				firstRowElements[i] = nameOfEventString;
 				secondRowElements[i] = noteForEventString;
 				
+				Log.i("elements", firstRowElements[i].toString());
+				Log.i("second row", secondRowElements[i].toString());
 				
 				
-				Log.i("name of event", nameOfEventString + "" + noteForEventString);	
+				//Log.i("name of event", nameOfEventString + "" + noteForEventString);	
 			}
-			
 			
 			
 		}catch(Exception e){
 			
 		}
+
+		
 
 	}
 	
@@ -166,10 +171,14 @@ public class ListFragment extends Fragment {
 		// Targeting the elements list
 		elementsListView = (ListView)view.findViewById(R.id.elements_list);
 		
-		
+		// my events data
 		Events_List_Adapter events_data[] = new Events_List_Adapter[]{
 				
-			new Events_List_Adapter(R.drawable.stop_icon, firstRowElements[0], secondRowElements[0])
+			
+			new Events_List_Adapter(R.drawable.stop_icon, firstRowElements[0], secondRowElements[0]),
+			new Events_List_Adapter(R.drawable.go_icon, firstRowElements[1], secondRowElements[1]),
+			new Events_List_Adapter(R.drawable.go_icon, firstRowElements[2], secondRowElements[2]),
+			new Events_List_Adapter(R.drawable.go_icon, firstRowElements[3], secondRowElements[3])
 			
 		};
 			

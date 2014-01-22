@@ -29,6 +29,13 @@ public class Event_Details extends Activity{
 	TextView alarmTextViewText;
 	TextView eventTimeTextViewText;
 	
+	String nameOfEventString;
+	String noteForEventString;
+	String categoryString;
+	String alarmTime;
+	String eventTime;
+	
+	
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +70,11 @@ public class Event_Details extends Activity{
  				
  			JSONObject nameOfEvent = c.getJSONObject("" + position);
  				
- 			String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
- 			String noteForEventString = nameOfEvent.getString("note_for_event").toString();
- 			String categoryString = nameOfEvent.getString("category").toString();
- 			String alarmTime = nameOfEvent.getString("alarm_time").toString();
- 			String eventTime = nameOfEvent.getString("time_of_event").toString();
+ 			nameOfEventString = nameOfEvent.getString("name_of_event").toString();
+ 			noteForEventString = nameOfEvent.getString("note_for_event").toString();
+ 			categoryString = nameOfEvent.getString("category").toString();
+ 			alarmTime = nameOfEvent.getString("alarm_time").toString();
+ 			eventTime = nameOfEvent.getString("time_of_event").toString();
  				
  				
  			Log.i("name of event", nameOfEventString);
@@ -110,6 +117,20 @@ public class Event_Details extends Activity{
     	case R.id.edit_icon:
     		
     		Log.i("edit icon pressed", "True");
+    		
+    		// starting the New_Event activity and passing along
+    		// information about this perticular event
+    		Intent addEventIntent = new Intent(this, New_Event.class);
+    		
+    		addEventIntent.putExtra("position", position);
+    		addEventIntent.putExtra("name_of_event", nameOfEventString);
+    		addEventIntent.putExtra("note_for_event", noteForEventString);
+    		addEventIntent.putExtra("category", categoryString);
+    		addEventIntent.putExtra("alarm_time", alarmTime);
+    		addEventIntent.putExtra("event_time", eventTime);
+    		
+			startActivity(addEventIntent);
+    		
 			
     		return true;
     	

@@ -12,6 +12,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,12 +52,38 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 	
 	int hourFromPicker = 0;
 	int minuteFromPicker = 0;
+	
+	int positionFromEditActivity;
+	
+	String nameOfEventFromEdit;
+	String noteForEventFromEdit;
+	String categoryForEventFromEdit;
+	String alarmTimeFromEdit;
+	String eventTimeFromEdit;
 
 
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	 super.onCreate(savedInstanceState);
+    	 
+    	 getActionBar().setDisplayHomeAsUpEnabled(true);
+    	 
+    	 // getting my extras if this activity was called from an 
+    	 // edit
+    	 /*
+    	 Bundle extras = getIntent().getExtras();
+         positionFromEditActivity = extras.getInt("position");
+         nameOfEventFromEdit = extras.getString("name_of_event");
+         noteForEventFromEdit = extras.getString("note_for_event");
+         categoryForEventFromEdit = extras.getString("category");
+         alarmTimeFromEdit = extras.getString("alarm_time");
+         eventTimeFromEdit = extras.getString("event_time");
+         */
+
+    	 
+    	 
+    	 
     	 
     	 _context = this;
     	 
@@ -191,6 +218,7 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
     		
     		// writing everything to json format
     		writeJson();
+    		
 			
     		return true;
 

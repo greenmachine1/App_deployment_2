@@ -122,6 +122,7 @@ public class Event_Details extends Activity{
     		// information about this perticular event
     		Intent addEventIntent = new Intent(this, New_Event.class);
     		
+    		addEventIntent.putExtra("from_main_activity", false);
     		addEventIntent.putExtra("position", position);
     		addEventIntent.putExtra("name_of_event", nameOfEventString);
     		addEventIntent.putExtra("note_for_event", noteForEventString);

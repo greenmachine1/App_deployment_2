@@ -64,6 +64,10 @@ public class MainActivity extends FragmentActivity {
     	case R.id.add_event:
     		
     		Intent addEventIntent = new Intent(_context, New_Event.class);
+    		
+    		// gets passed to the new event activity to tell which
+    		// activity calls it
+    		addEventIntent.putExtra("from_main_activity", true);
 			startActivity(addEventIntent);
 			
     		return true;

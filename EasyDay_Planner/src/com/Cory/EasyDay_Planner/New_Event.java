@@ -71,15 +71,26 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
     	 
     	 // getting my extras if this activity was called from an 
     	 // edit
-    	 /*
+    	 
     	 Bundle extras = getIntent().getExtras();
-         positionFromEditActivity = extras.getInt("position");
-         nameOfEventFromEdit = extras.getString("name_of_event");
-         noteForEventFromEdit = extras.getString("note_for_event");
-         categoryForEventFromEdit = extras.getString("category");
-         alarmTimeFromEdit = extras.getString("alarm_time");
-         eventTimeFromEdit = extras.getString("event_time");
-         */
+    	 
+    	 if(extras.getBoolean("from_main_activity") == false){
+    	 
+    		 positionFromEditActivity = extras.getInt("position");
+    		 nameOfEventFromEdit = extras.getString("name_of_event");
+    		 noteForEventFromEdit = extras.getString("note_for_event");
+    		 categoryForEventFromEdit = extras.getString("category");
+    		 alarmTimeFromEdit = extras.getString("alarm_time");
+    		 eventTimeFromEdit = extras.getString("event_time");
+    		 
+    		 
+    		 Log.i("position", "" + positionFromEditActivity);
+    		 Log.i("name", nameOfEventFromEdit);
+    		 Log.i("note", noteForEventFromEdit);
+    		 Log.i("category", categoryForEventFromEdit);
+    		 Log.i("alarm time", alarmTimeFromEdit);
+    		 Log.i("event time", eventTimeFromEdit);
+    	 }
 
     	 
     	 

@@ -9,6 +9,7 @@ import com.Cory.FileManager.FileManager;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 
 public class ListFragment extends Fragment {
@@ -34,7 +38,6 @@ public class ListFragment extends Fragment {
 	String JsonString;
 	
 
-	
 	String[] firstRowElements = {"Grant Break", "Take a break at 12:15pm", "Do Laundry by 5pm", "Take Fido out for a walk", "Pick up Son at 7pm"};
 	String[] secondRowElements = {"13:25 Left", "Alarm set for 10 minutes prior", "Alarm set for 1 hour prior", "At some point walk the dog", "Alarm set for 10 minutes prior" };
 
@@ -60,8 +63,7 @@ public class ListFragment extends Fragment {
 		}else if(!(file.exists())){
 			Log.i("no file exists", "true");
 		}
-		
-		
+			
 	}
 
 
@@ -69,9 +71,6 @@ public class ListFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
-		
-		
 	}
 	
 	
@@ -132,15 +131,14 @@ public class ListFragment extends Fragment {
 				
 				// storing the elements
 				firstRowElements[i] = nameOfEventString;
-				secondRowElements[i] = noteForEventString;
+				//secondRowElements[i] = noteForEventString;
 				
 				Log.i("elements", firstRowElements[i].toString());
-				Log.i("second row", secondRowElements[i].toString());
+				//Log.i("second row", secondRowElements[i].toString());
 				
-				
-				//Log.i("name of event", nameOfEventString + "" + noteForEventString);	
+				adapter.notifyDataSetChanged();
+						
 			}
-			
 			
 		}catch(Exception e){
 			
@@ -149,6 +147,12 @@ public class ListFragment extends Fragment {
 		
 
 	}
+	
+	
+
+
+	
+	
 	
 	
 
@@ -184,12 +188,32 @@ public class ListFragment extends Fragment {
 			
 		// the adapter	
 		adapter = new CustomAdapter(_context,R.layout.elements_row_layout, events_data);
+		
 
 		
 		// setting the adapter to the list
 		elementsListView.setAdapter(adapter);
+		elementsListView.setOnItemClickListener(new OnItemClickListener(){
+
+			
+			// user clicks on an event and sends them to the details activity
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				
+				// starting the Event Details activity
+				Intent intent = new Intent(getActivity(), Event_Details.class);
+				intent.putExtra("position", position);
+				startActivity(intent);
+			}
+			
+		});
+
+			
 		
 		return view;
 		
 	}	
+	
+	
 }

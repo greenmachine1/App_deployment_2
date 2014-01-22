@@ -1,7 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    
+    android:layout_height="match_parent"
+    android:background="@drawable/background_blue_gradient" >
+
+    <TextView
+        android:id="@+id/event_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="95dp"
+        android:text="Event : " />
+
+    <TextView
+        android:id="@+id/event_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/event_title"
+        android:layout_alignBottom="@+id/event_title"
+        android:layout_marginLeft="0dp"
+        android:layout_toRightOf="@+id/event_title"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/note_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/event_title"
+        android:layout_below="@+id/event_title"
+        android:layout_marginTop="30dp"
+        android:text="Note : " />
+
+    <TextView
+        android:id="@+id/category_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/note_title"
+        android:layout_below="@+id/note_title"
+        android:layout_marginTop="30dp"
+        android:text="Category : " />
+
+    <TextView
+        android:id="@+id/alarm_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/category_title"
+        android:layout_below="@+id/category_title"
+        android:layout_marginTop="30dp"
+        android:text="Alarm : " />
+
+    <TextView
+        android:id="@+id/event_time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/alarm_title"
+        android:layout_below="@+id/alarm_title"
+        android:layout_marginTop="30dp"
+        android:text="Event Time : " />
+
+    <TextView
+        android:id="@+id/event_alarm_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/event_time_title"
+        android:layout_toRightOf="@+id/alarm_title"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/event_category_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/alarm_title"
+        android:layout_toRightOf="@+id/category_title"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/event_note_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/category_title"
+        android:layout_toRightOf="@+id/note_title"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/event_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/event_time_title"
+        android:layout_alignBottom="@+id/event_time_title"
+        android:layout_toRightOf="@+id/event_time_title"
+        android:text="TextView" />
 
 </RelativeLayout>

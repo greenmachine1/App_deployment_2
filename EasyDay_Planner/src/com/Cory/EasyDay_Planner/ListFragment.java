@@ -52,6 +52,7 @@ public class ListFragment extends Fragment {
 		
 		// getting the file json.txt
 		File file = getActivity().getFileStreamPath(fileName);
+		//file.delete();
 		
 		// if it exists...
 		if(file.exists()){
@@ -85,6 +86,7 @@ public class ListFragment extends Fragment {
 		
 		// getting the file json.txt
 		File file = getActivity().getFileStreamPath(fileName);
+		
 		
 		// if it exists...
 		if(file.exists()){
@@ -204,6 +206,8 @@ public class ListFragment extends Fragment {
 				// starting the Event Details activity
 				Intent intent = new Intent(getActivity(), Event_Details.class);
 				intent.putExtra("position", position);
+				
+				Log.i("position", "" + position);
 				startActivity(intent);
 			}
 			

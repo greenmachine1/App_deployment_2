@@ -25,7 +25,7 @@
         android:text="EasyDay Planner Version 1.0" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/event_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
@@ -39,7 +39,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/event_name_label"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:gravity="center"
@@ -47,7 +47,7 @@
         android:text="This application is meant to be free with no paid for features." />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/event_note_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"

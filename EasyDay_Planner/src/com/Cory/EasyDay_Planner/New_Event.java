@@ -230,6 +230,12 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 					jsonObject.put("alarm_time", "" + 3);
 					jsonObject.put("time_of_event", "" + 4);
 					
+					// this will be used to set the completeness of the 
+					// activity
+					// from the event details, the user can select
+					// mark as done, which will change this icon to "stop_icon"
+					jsonObject.put("icon", "go_icon");
+					
 					// putting all the elements into a json object...
 					
 					
@@ -267,8 +273,14 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 					jsonObject.put("name_of_event", nameOfEvent.getText().toString());
 					jsonObject.put("note_for_event", noteText.getText().toString());
 					jsonObject.put("category", selectedItemFromCategory.toString());
-					jsonObject.put("alarm_time", "" + 6);
+					jsonObject.put("alarm_time", "" + 3);
 					jsonObject.put("time_of_event", "" + 4);
+					
+					// this will be used to set the completeness of the 
+					// activity
+					// from the event details, the user can select
+					// mark as done, which will change this icon to "stop_icon"
+					jsonObject.put("icon", "go_icon");
 					
 					// putting all the elements into a json object...
 					nameOfJsonObject.put("" + (mainObjectArray.length()), jsonObject);

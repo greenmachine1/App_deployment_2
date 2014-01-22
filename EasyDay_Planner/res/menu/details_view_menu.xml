@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+<item
+        android:id="@+id/edit_icon"
+        android:icon="@drawable/edit"
+        android:showAsAction="always"/>
+<item
+        android:id="@+id/delete_icon"
+        android:icon="@drawable/delete"
+        android:showAsAction="always"/>
+<item
+        android:id="@+id/mark_as_done_overflow"
+        android:title="Mark as Done"
+        android:icon="@drawable/accept_icon"
+        android:showAsAction="never"/>
+<item
+        android:id="@+id/pause_timer_overflow"
+        android:title="Pause Timer"
+        android:icon="@drawable/accept_icon"
+        android:showAsAction="never"/>
+<item
+        android:id="@+id/share_overflow"
+        android:title="Share"
+        android:icon="@drawable/accept_icon"
+        android:showAsAction="never"/>
+</menu>

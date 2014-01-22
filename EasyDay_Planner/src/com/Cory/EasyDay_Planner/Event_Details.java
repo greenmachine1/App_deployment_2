@@ -6,8 +6,11 @@ import org.json.JSONObject;
 import com.Cory.FileManager.FileManager;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class Event_Details extends Activity{
@@ -87,4 +90,95 @@ public class Event_Details extends Activity{
          
          
 	}
+	
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.details_view_menu, menu);
+
+        
+        return true;
+    }
+    
+ // Action bar selection handler
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+		
+    	switch (item.getItemId()){
+    	
+    	// what to do when the edi icon is selected 
+    	case R.id.edit_icon:
+    		
+    		Log.i("edit icon pressed", "True");
+			
+    		return true;
+    	
+    	// what to do when the delete icon is selected
+    	case R.id.delete_icon:
+
+    		Log.i("delete icon pressed", "True");
+    		
+    		//deleteCurrentJson();
+    		
+    		return true;
+    		
+    		
+    	// what to do when the mark as done overflow is selected	
+    	case R.id.mark_as_done_overflow:
+    		
+    		Log.i("mark as done icon pressed", "True");
+			
+    		return true;
+    		
+    		// what to do when the pause timer overflow is selected 
+    	case R.id.pause_timer_overflow:
+    		
+    		Log.i("pause timer icon pressed", "True");
+			
+    		return true;
+    		
+    		// what to do when the share overflow is selected 
+    	case R.id.share_overflow:
+    		
+    		Log.i("share icon pressed", "True");
+			
+    		return true;
+    		
+    		default:
+    			return super.onOptionsItemSelected(item);
+    	}
+    	
+    }
+    
+    
+    
+    // deletes the json data that the user has selected
+    // this doesnt actually work at the moment
+    public void deleteCurrentJson(){
+    	
+    	
+    	try{
+    		
+    		
+    		JSONObject mainJsonObject = new JSONObject(jsonString);
+ 			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+
+ 			
+ 			JSONObject c = mainJsonArray.getJSONObject(position);
+ 			
+ 			Log.i("data is", c.toString());
+ 				
+ 			c.getJSONObject("" +position).remove("" + position);
+ 			
+ 			//JSONObject nameOfEvent = (JSONObject) c.remove("" + position);
+ 			//JSONObject nameOfEvent = c.getJSONObject("" + position);
+    		
+    		
+    	}catch(Exception e){
+    		
+    	}
+    	
+    	
+    	
+    }
 }

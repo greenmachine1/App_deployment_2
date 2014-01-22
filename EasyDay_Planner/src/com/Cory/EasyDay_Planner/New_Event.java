@@ -10,6 +10,8 @@ import com.Cory.FileManager.FileManager;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class New_Event extends Activity implements OnItemSelectedListener{
+public class New_Event extends FragmentActivity implements OnItemSelectedListener, TimePickerFragment.OnTimeSetListener{
 
 	
 	Spinner categorySpinner;
@@ -46,6 +48,9 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 	JSONArray mainObjectArray;
 	
 	int arrayLength;
+	
+	int hourFromPicker = 0;
+	int minuteFromPicker = 0;
 
 
 	
@@ -94,6 +99,10 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 				// TODO Auto-generated method stub
 				
 				Log.i("set Time button", "Pressed");
+				
+				DialogFragment newPicker = new TimePicker();
+				newPicker.show(getSupportFragmentManager(), "timePicker");
+				
 				
 			}
         	 
@@ -301,6 +310,26 @@ public class New_Event extends Activity implements OnItemSelectedListener{
 				newFileManager.writeStringFile(this, fileName, mainObject.toString());
 				
 			}
+		
+	}
+
+
+
+
+
+
+
+
+	// call back from my time picker
+	public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		hourFromPicker = hourOfDay;
+		minuteFromPicker = minute;
+		
+		Log.i("hours and minutes", "" + hourFromPicker + "" + minuteFromPicker);
 		
 	}
 

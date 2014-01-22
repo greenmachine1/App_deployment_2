@@ -43,7 +43,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_below="@+id/category_spinner"
-        android:text="Set an Alarm" />
+        android:text="Set an Alarm" 
+        android:onClick="showTimePickerDialog"/>
 
     <Button
         android:id="@+id/time_set_button"

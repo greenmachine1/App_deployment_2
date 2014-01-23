@@ -90,6 +90,9 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
     		 Log.i("category", categoryForEventFromEdit);
     		 Log.i("alarm time", alarmTimeFromEdit);
     		 Log.i("event time", eventTimeFromEdit);
+    		 
+    		 
+    		 
     	 }
 
     	 

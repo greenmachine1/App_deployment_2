@@ -169,7 +169,7 @@ public class Event_Details extends Activity{
     		Intent intent = new Intent(Intent.ACTION_SEND);
     		intent.setType("*/*");
     		intent.putExtra(intent.EXTRA_TITLE, nameOfEventString);
-    		intent.putExtra(intent.EXTRA_TEXT, eventTime + "" + noteForEventString);
+    		intent.putExtra(intent.EXTRA_TEXT, eventTime + " " + noteForEventString);
 			if(intent.resolveActivity(getPackageManager()) != null){
 				startActivity(intent);
 			}

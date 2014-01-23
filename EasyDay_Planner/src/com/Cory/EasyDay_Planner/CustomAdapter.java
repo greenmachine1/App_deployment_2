@@ -38,6 +38,7 @@ public class CustomAdapter extends ArrayAdapter<Events_List_Adapter>{
 			row = inflater.inflate(layoutResourceId, parent, false);
 			
 			holder = new Events_List_Adapter_Holder();
+			
 			holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
 			holder.txtTitle = (TextView)row.findViewById(R.id.txtTitle);
 			holder.secondRow = (TextView)row.findViewById(R.id.second_row);
@@ -50,6 +51,7 @@ public class CustomAdapter extends ArrayAdapter<Events_List_Adapter>{
 		}
 		
 		Events_List_Adapter events_list_adapter = data[position];
+		
 		holder.txtTitle.setText(events_list_adapter.title);
 		holder.secondRow.setText(events_list_adapter.second_Row);
 		holder.imgIcon.setImageResource(events_list_adapter.icon);

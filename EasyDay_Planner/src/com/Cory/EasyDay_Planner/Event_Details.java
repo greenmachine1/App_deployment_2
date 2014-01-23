@@ -163,6 +163,16 @@ public class Event_Details extends Activity{
     	case R.id.share_overflow:
     		
     		Log.i("share icon pressed", "True");
+    		
+    		
+    		// needs to start a sharing intent
+    		Intent intent = new Intent(Intent.ACTION_SEND);
+    		intent.setType("*/*");
+    		intent.putExtra(intent.EXTRA_TITLE, nameOfEventString);
+    		intent.putExtra(intent.EXTRA_TEXT, eventTime + "" + noteForEventString);
+			if(intent.resolveActivity(getPackageManager()) != null){
+				startActivity(intent);
+			}
 			
     		return true;
     		

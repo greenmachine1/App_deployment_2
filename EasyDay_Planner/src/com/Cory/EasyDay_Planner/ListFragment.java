@@ -38,7 +38,7 @@ public class ListFragment extends Fragment {
 	FileManager fileManager;
 	
 	String JsonString;
-	ArrayList<HashMap<String, String>> newList;
+	
 	
 
 	String[] firstRowElements = {"Grant Break", "Take a break at 12:15pm", "Do Laundry by 5pm", "Take Fido out for a walk", "Pick up Son at 7pm"};
@@ -54,7 +54,6 @@ public class ListFragment extends Fragment {
 		
 		Log.i("This happens first", "True");
 		
-		newList = new ArrayList<HashMap<String, String>>();
 		
 		
 		// getting the file json.txt
@@ -123,7 +122,7 @@ public class ListFragment extends Fragment {
 		try{
 			
 			
-			HashMap<String, String> myList = new HashMap<String,String>();
+			
 			
 			JSONObject mainJsonObject = new JSONObject(JsonString);
 			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
@@ -139,16 +138,14 @@ public class ListFragment extends Fragment {
 				
 				JSONObject nameOfEvent = c.getJSONObject("" + i);
 				
+				
+				
+				
 				String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
 				String noteForEventString = nameOfEvent.getString("note_for_event").toString();
 				String statusIconString = nameOfEvent.getString("icon").toString();
 				
-				/*
-				myList.put("name", nameOfEventString);
-				myList.put("note", noteForEventString);
-				myList.put("status", statusIconString);
-				newList.add(myList);
-				*/
+				
 				
 				// storing the elements
 				firstRowElements[i] = nameOfEventString;
@@ -183,7 +180,6 @@ public class ListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		Log.i("OnCreateView for fragment", "Got created");
 		
 		
 		View view;
@@ -207,7 +203,7 @@ public class ListFragment extends Fragment {
 				
 		};
 
-		
+		// setting the adapter info
 		adapter = new CustomAdapter(getActivity(),R.layout.elements_row_layout, events_data);
 
 		

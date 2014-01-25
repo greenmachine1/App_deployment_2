@@ -1,5 +1,7 @@
 package com.Cory.EasyDay_Planner;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,12 +15,12 @@ public class CustomAdapter extends ArrayAdapter<Events_List_Adapter>{
 
 	Context context;
 	int layoutResourceId;
-	Events_List_Adapter data[] = null;
+	List<Events_List_Adapter> data = null;
 	
 	// constructor, takes in the context, the layoutResource
 	// and the data
 	public CustomAdapter(Context context, int layoutResourceId,
-			Events_List_Adapter[] data) {
+			List<Events_List_Adapter> data) {
 		super(context, layoutResourceId, data);
 		
 		this.layoutResourceId = layoutResourceId;
@@ -50,7 +52,7 @@ public class CustomAdapter extends ArrayAdapter<Events_List_Adapter>{
 			
 		}
 		
-		Events_List_Adapter events_list_adapter = data[position];
+		Events_List_Adapter events_list_adapter = getItem(position);
 		
 		holder.txtTitle.setText(events_list_adapter.title);
 		holder.secondRow.setText(events_list_adapter.second_Row);

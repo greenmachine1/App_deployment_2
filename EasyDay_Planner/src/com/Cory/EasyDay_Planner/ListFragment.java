@@ -3,6 +3,7 @@ package com.Cory.EasyDay_Planner;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,12 +23,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class ListFragment extends Fragment {
 	
 	ListView elementsListView;
-	//ArrayAdapter<String> adapter;
 	
 	CustomAdapter adapter;
 	
@@ -39,23 +40,31 @@ public class ListFragment extends Fragment {
 	
 	String JsonString;
 	
-	
+	JSONArray mainJsonArray;
 
-	String[] firstRowElements = {"Grant Break", "Take a break at 12:15pm", "Do Laundry by 5pm", "Take Fido out for a walk", "Pick up Son at 7pm"};
-	String[] secondRowElements = {"13:25 Left", "Alarm set for 10 minutes prior", "Alarm set for 1 hour prior", "At some point walk the dog", "Alarm set for 10 minutes prior" };
-	String[] iconElements = {"R.drawable.stop_icon", "R.drawable.go_icon", "R.drawable.go_icon", "R.drawable.go_icon", "R.drawable.go_icon"};
+	HashMap<String, String> firstRowHash = new HashMap<String, String>();
+	HashMap<String, String> secondRowHash = new HashMap<String, String>();
+	
+	ArrayList<Events_List_Adapter> items;
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
+
+
+	}
+
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
 		
+		
+
 		fileManager = new FileManager();
-		
-		Log.i("This happens first", "True");
-		
-		
-		
+
 		// getting the file json.txt
 		File file = getActivity().getFileStreamPath(fileName);
 		//file.delete();
@@ -70,14 +79,9 @@ public class ListFragment extends Fragment {
 		}else if(!(file.exists())){
 			Log.i("no file exists", "true");
 		}
-			
-	}
-
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
+		
+		
+		
 		
 	}
 	
@@ -91,6 +95,9 @@ public class ListFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onPause();
 		
+		
+		
+		
 		// getting the file json.txt
 		File file = getActivity().getFileStreamPath(fileName);
 		
@@ -100,8 +107,7 @@ public class ListFragment extends Fragment {
 					
 			// ... load the json data
 			loadJsonData();
-			
-					
+
 		// ... and if it doesnt	
 		}else if(!(file.exists())){
 					
@@ -114,18 +120,16 @@ public class ListFragment extends Fragment {
 	
 	
 	// loads in the json data from the file
+	// this reloads everytime the user goes back to the main activity
 	public void loadJsonData(){
 		
 		// reading the file and putting it into json format
 		JsonString = fileManager.readStringFile(getActivity(), fileName);
-
+		
 		try{
-			
-			
-			
-			
+
 			JSONObject mainJsonObject = new JSONObject(JsonString);
-			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+			mainJsonArray = mainJsonObject.getJSONArray("main");
 			
 			Log.i("The contents of the file are", mainJsonArray.toString());
 			
@@ -138,31 +142,22 @@ public class ListFragment extends Fragment {
 				
 				JSONObject nameOfEvent = c.getJSONObject("" + i);
 				
-				
-				
-				
 				String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
 				String noteForEventString = nameOfEvent.getString("note_for_event").toString();
-				String statusIconString = nameOfEvent.getString("icon").toString();
+				
+				firstRowHash.put("" + i, nameOfEventString);
+				secondRowHash.put("" + i, noteForEventString);
 				
 				
-				
-				// storing the elements
-				firstRowElements[i] = nameOfEventString;
-				secondRowElements[i] = noteForEventString;
-				
-				Log.i("elements", firstRowElements[i].toString());
-				//Log.i("second row", secondRowElements[i].toString());
-				
-				adapter.notifyDataSetChanged();
 						
 			}
 			
-		}catch(Exception e){
-			
-		}
 
+		}catch(Exception e){
+			Log.e("error", e.getMessage().toString());
+		}
 		
+
 
 	}
 	
@@ -179,8 +174,8 @@ public class ListFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
-		
+
+		Log.i("onCreateView", "called");
 		
 		View view;
 		
@@ -190,21 +185,25 @@ public class ListFragment extends Fragment {
 
 		// Targeting the elements list
 		elementsListView = (ListView)view.findViewById(R.id.elements_list);
-		
-		// my events data
-	
-		
-		Events_List_Adapter events_data[] = new Events_List_Adapter[]{
-				
-				new Events_List_Adapter(R.drawable.stop_icon, firstRowElements[0], secondRowElements[0]),
-				new Events_List_Adapter(R.drawable.go_icon, firstRowElements[1], secondRowElements[1]),
-				new Events_List_Adapter(R.drawable.go_icon, firstRowElements[2], secondRowElements[2]),
-				new Events_List_Adapter(R.drawable.go_icon, firstRowElements[3], secondRowElements[3])	
-				
-		};
 
+		
+
+		// this is pretty complicated but it iterates through my hashmaps
+		// puts the data into a new Events_List_Adapter, then puts all that 
+		// into a List array, then puts it into the adapter
+		items = new ArrayList<Events_List_Adapter>();
+		for(int i = 0; i < firstRowHash.size(); i++){
+			Events_List_Adapter item = new Events_List_Adapter(R.drawable.go_icon, firstRowHash.get("" + i).toString(), secondRowHash.get("" + i).toString());
+			items.add(item);
+			
+		}
+		
+		
+		
 		// setting the adapter info
-		adapter = new CustomAdapter(getActivity(),R.layout.elements_row_layout, events_data);
+		//adapter.notifyDataSetChanged();
+		adapter = new CustomAdapter(getActivity(),R.layout.elements_row_layout, items);
+		
 
 		
 		// setting the adapter to the list
@@ -228,8 +227,6 @@ public class ListFragment extends Fragment {
 			
 		});
 
-			
-		
 		return view;
 		
 	}	

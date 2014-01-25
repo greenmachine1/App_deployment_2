@@ -8,6 +8,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.Cory.EasyDay_Planner.CustomAdapter.Events_List_Adapter_Holder;
 import com.Cory.FileManager.FileManager;
 
 import android.app.Activity;
@@ -20,10 +21,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 public class ListFragment extends Fragment {
@@ -147,17 +150,13 @@ public class ListFragment extends Fragment {
 				
 				firstRowHash.put("" + i, nameOfEventString);
 				secondRowHash.put("" + i, noteForEventString);
+	
 				
-				
-						
 			}
 			
-
 		}catch(Exception e){
 			Log.e("error", e.getMessage().toString());
 		}
-		
-
 
 	}
 	
@@ -192,22 +191,21 @@ public class ListFragment extends Fragment {
 		// puts the data into a new Events_List_Adapter, then puts all that 
 		// into a List array, then puts it into the adapter
 		items = new ArrayList<Events_List_Adapter>();
+		
 		for(int i = 0; i < firstRowHash.size(); i++){
 			Events_List_Adapter item = new Events_List_Adapter(R.drawable.go_icon, firstRowHash.get("" + i).toString(), secondRowHash.get("" + i).toString());
 			items.add(item);
 			
 		}
 		
-		
-		
 		// setting the adapter info
-		//adapter.notifyDataSetChanged();
 		adapter = new CustomAdapter(getActivity(),R.layout.elements_row_layout, items);
-		
 
+		
 		
 		// setting the adapter to the list
 		elementsListView.setAdapter(adapter);
+		
 		
 		elementsListView.setOnItemClickListener(new OnItemClickListener(){
 

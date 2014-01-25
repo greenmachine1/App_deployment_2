@@ -1,5 +1,9 @@
 package com.Cory.EasyDay_Planner;
 
+import java.util.List;
+
+import android.content.ClipData.Item;
+
 public class Events_List_Adapter {
 	public int icon;
 	public String title;
@@ -14,5 +18,7 @@ public class Events_List_Adapter {
 		this.icon = icon;
 		this.title = title;
 		this.second_Row = second_Row;
+		
 	}
+	
 }

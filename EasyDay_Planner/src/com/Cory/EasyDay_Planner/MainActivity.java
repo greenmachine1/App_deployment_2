@@ -1,21 +1,18 @@
 package com.Cory.EasyDay_Planner;
 
-import java.io.File;
+
 
 import com.Cory.EasyDay_Planner.R;
 
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.ListFragment;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+
 
 public class MainActivity extends FragmentActivity {
 
@@ -45,6 +42,25 @@ public class MainActivity extends FragmentActivity {
     
     
     @Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		Log.i("Main activity", "resumed yes!");
+		
+		
+	}
+
+
+
+
+
+
+
+
+
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);

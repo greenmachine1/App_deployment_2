@@ -7,6 +7,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class CustomAdapter extends ArrayAdapter<Events_List_Adapter>{
 		this.layoutResourceId = layoutResourceId;
 		this.context = context;
 		this.data = data;
+		
 	}
 	
 	
@@ -34,6 +36,7 @@ public class CustomAdapter extends ArrayAdapter<Events_List_Adapter>{
 		
 		View row = convertView;
 		Events_List_Adapter_Holder holder = null;
+		
 		
 		if(row == null){
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
@@ -58,6 +61,9 @@ public class CustomAdapter extends ArrayAdapter<Events_List_Adapter>{
 		holder.secondRow.setText(events_list_adapter.second_Row);
 		holder.imgIcon.setImageResource(events_list_adapter.icon);
 		
+		
+
+		
 		return row;
 		
 	}
@@ -67,6 +73,8 @@ public class CustomAdapter extends ArrayAdapter<Events_List_Adapter>{
 		ImageView imgIcon;
 		TextView txtTitle;
 		TextView secondRow;
+		
 	}
+	
 
 }

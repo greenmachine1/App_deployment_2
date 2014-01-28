@@ -37,6 +37,10 @@ public class Event_Details extends Activity{
 	String alarmTime;
 	String eventTime;
 	
+	JSONObject nameOfEvent;
+	
+	JSONObject c;
+	
 	
 	
 	@Override
@@ -67,22 +71,32 @@ public class Event_Details extends Activity{
  			
  			JSONObject mainJsonObject = new JSONObject(jsonString);
  			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+ 			
+ 			
 
  			Log.i("main array", mainJsonArray.toString());
  			
+ 			
  			for(int i = 0; i < mainJsonArray.length(); i++){
  			
- 				JSONObject c = mainJsonArray.getJSONObject(i);
+ 				c = mainJsonArray.getJSONObject(i);
  				
+ 				JSONObject newName = c.getJSONObject(position);
  				
+ 				Log.i("object c", newName.toString());
  				
+ 			}
+ 			
+ 			
+ 			
+ 			
+ 			
+ 				//Log.i("object c", c.toString());
  				
- 				
- 				Log.i("position name", position);
- 				
- 				Log.i("b object", c.toString());
-
-	 			JSONObject nameOfEvent = c.getJSONObject(position);
+	 			//nameOfEvent = c.getJSONObject(position);
+	 			
+	 			Log.i("name of event", nameOfEvent.toString());
+ 			
 	 				
 	 			nameOfEventString = nameOfEvent.getString("name_of_event").toString();
 	 			noteForEventString = nameOfEvent.getString("note_for_event").toString();
@@ -101,7 +115,7 @@ public class Event_Details extends Activity{
 	 			alarmTextViewText.setText(alarmTime);
 	 			eventTimeTextViewText.setText(eventTime);
 	 			
- 			}
+ 			
  				
  			
  		}catch(Exception e){

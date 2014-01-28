@@ -139,7 +139,6 @@ public class ListFragment extends Fragment {
 				
 				
 				
-				
 				// amazing! Figured out how to grab the name!
 				String nameOfEventStringThing = c.names().toString();
 			

@@ -1,5 +1,7 @@
 package com.Cory.EasyDay_Planner;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,7 +17,7 @@ import android.widget.TextView;
 
 public class Event_Details extends Activity{
 
-	int position;
+	String position;
 	
 	String fileName = "json.txt";
 	
@@ -45,7 +47,7 @@ public class Event_Details extends Activity{
          setContentView(R.layout.event_details);
         
          Bundle extras = getIntent().getExtras();
-         position = extras.getInt("position");
+         position = extras.getString("position");
          
          eventTextViewText = (TextView)findViewById(R.id.event_name_label);
          noteTextViewText = (TextView)findViewById(R.id.event_note_label);
@@ -66,28 +68,40 @@ public class Event_Details extends Activity{
  			JSONObject mainJsonObject = new JSONObject(jsonString);
  			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
 
- 			JSONObject c = mainJsonArray.getJSONObject(position);
- 				
- 			JSONObject nameOfEvent = c.getJSONObject("" + position);
- 				
- 			nameOfEventString = nameOfEvent.getString("name_of_event").toString();
- 			noteForEventString = nameOfEvent.getString("note_for_event").toString();
- 			categoryString = nameOfEvent.getString("category").toString();
- 			alarmTime = nameOfEvent.getString("alarm_time").toString();
- 			eventTime = nameOfEvent.getString("time_of_event").toString();
- 				
- 				
- 			Log.i("name of event", nameOfEventString);
- 			Log.i("note for event", noteForEventString);
- 			Log.i("category", categoryString);
+ 			Log.i("main array", mainJsonArray.toString());
  			
- 			eventTextViewText.setText(nameOfEventString);
- 			noteTextViewText.setText(noteForEventString);
- 			categoryTextViewText.setText(categoryString);
- 			alarmTextViewText.setText(alarmTime);
- 			eventTimeTextViewText.setText(eventTime);
+ 			for(int i = 0; i < mainJsonArray.length(); i++){
  			
+ 				JSONObject c = mainJsonArray.getJSONObject(i);
  				
+ 				
+ 				
+ 				
+ 				
+ 				Log.i("position name", position);
+ 				
+ 				Log.i("b object", c.toString());
+
+	 			JSONObject nameOfEvent = c.getJSONObject(position);
+	 				
+	 			nameOfEventString = nameOfEvent.getString("name_of_event").toString();
+	 			noteForEventString = nameOfEvent.getString("note_for_event").toString();
+	 			categoryString = nameOfEvent.getString("category").toString();
+	 			alarmTime = nameOfEvent.getString("alarm_time").toString();
+	 			eventTime = nameOfEvent.getString("time_of_event").toString();
+	 				
+	 				
+	 			Log.i("name of event", nameOfEventString);
+	 			Log.i("note for event", noteForEventString);
+	 			Log.i("category", categoryString);
+	 			
+	 			eventTextViewText.setText(nameOfEventString);
+	 			noteTextViewText.setText(noteForEventString);
+	 			categoryTextViewText.setText(categoryString);
+	 			alarmTextViewText.setText(alarmTime);
+	 			eventTimeTextViewText.setText(eventTime);
+	 			
+ 			}
  				
  			
  		}catch(Exception e){
@@ -140,7 +154,7 @@ public class Event_Details extends Activity{
 
     		Log.i("delete icon pressed", "True");
     		
-    		//deleteCurrentJson();
+    		deleteCurrentJson();
     		
     		return true;
     		
@@ -194,20 +208,24 @@ public class Event_Details extends Activity{
     		
     		JSONObject mainJsonObject = new JSONObject(jsonString);
  			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+ 			
+ 			
+ 			// need to remove this object from the list
+ 			// problem though, the position isnt always going to be the exact object
+ 			// to remove.
+ 			//JSONObject nameOfEvent = mainJsonArray.getJSONObject(position).getJSONObject("" + position);
+ 			
+ 			//Log.i("name of event", nameOfEvent.toString());
 
  			
- 			JSONObject c = mainJsonArray.getJSONObject(position);
  			
- 			Log.i("data is", c.toString());
- 				
- 			c.getJSONObject("" +position).remove("" + position);
  			
  			//JSONObject nameOfEvent = (JSONObject) c.remove("" + position);
  			//JSONObject nameOfEvent = c.getJSONObject("" + position);
     		
     		
     	}catch(Exception e){
-    		
+    		Log.e("error", e.getMessage().toString());
     	}
     	
     	

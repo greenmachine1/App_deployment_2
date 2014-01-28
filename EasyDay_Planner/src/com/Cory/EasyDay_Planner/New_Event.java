@@ -95,19 +95,13 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
     		 
     	 }
 
-    	 
-    	 
-    	 
-    	 
     	 _context = this;
     	 
     	 newFileManager = new FileManager();
     	 
     	 mainObject = new JSONObject();
     	 mainObjectArray = new JSONArray();
-    	 
-    	 
-    	 
+
     	 // calling on my list view fragment
          setContentView(R.layout.new_event_layout);
          
@@ -232,8 +226,7 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
     		
     		// writing everything to json format
     		writeJson();
-    		
-			
+
     		return true;
 
     		default:
@@ -288,10 +281,7 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 					jsonObject.put("icon", "go_icon");
 					
 					// putting all the elements into a json object...
-					
-					
-					
-					nameOfJsonObject.put("" + mainArrayObject.length(), jsonObject);
+					nameOfJsonObject.put(nameOfEvent.getText().toString(), jsonObject);
 					
 					
 					
@@ -333,8 +323,15 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 					// mark as done, which will change this icon to "stop_icon"
 					jsonObject.put("icon", "go_icon");
 					
+
+					
 					// putting all the elements into a json object...
-					nameOfJsonObject.put("" + (mainObjectArray.length()), jsonObject);
+					nameOfJsonObject.put(nameOfEvent.getText().toString(), jsonObject);
+					
+					
+					
+					
+					
 					
 					// ...then putting that object into the main array...
 					mainObjectArray.put(nameOfJsonObject);

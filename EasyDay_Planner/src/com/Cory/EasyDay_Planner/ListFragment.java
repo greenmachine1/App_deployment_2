@@ -63,6 +63,7 @@ public class ListFragment extends Fragment {
 		
 		// getting the file json.txt
 		File file = getActivity().getFileStreamPath(fileName);
+		
 		//file.delete();
 		
 		// if it exists...
@@ -74,6 +75,7 @@ public class ListFragment extends Fragment {
 		// ... and if it doesnt	
 		}else if(!(file.exists())){
 			Log.i("no file exists", "true");
+			adapter.notifyDataSetChanged();
 		}
 
 	}
@@ -101,6 +103,10 @@ public class ListFragment extends Fragment {
 		// ... and if it doesnt	
 		}else if(!(file.exists())){
 					
+			Log.i("file not found", "true");
+			
+			items.clear();
+			adapter.notifyDataSetChanged();
 		}
 		
 		

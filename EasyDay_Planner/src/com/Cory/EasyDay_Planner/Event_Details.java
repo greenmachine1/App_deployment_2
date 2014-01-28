@@ -1,5 +1,6 @@
 package com.Cory.EasyDay_Planner;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 
 public class Event_Details extends Activity{
 
+	File file;
+	
 	String position;
 	
 	String fileName = "json.txt";
@@ -37,7 +40,11 @@ public class Event_Details extends Activity{
 	String alarmTime;
 	String eventTime;
 	
+	String removedBrackets;
+	
 	JSONObject nameOfEvent;
+	
+	
 	
 	ArrayList<String> listOfNamesArrayList = new ArrayList<String>();
 	
@@ -48,9 +55,13 @@ public class Event_Details extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
     	 super.onCreate(savedInstanceState);
     	 
+    	 file = this.getFileStreamPath("json.txt");
+    	 
     	 // calling on my list view fragment
          setContentView(R.layout.event_details);
         
+         
+         // getting the position of the event from the Listfragment
          Bundle extras = getIntent().getExtras();
          position = extras.getString("position");
          
@@ -61,7 +72,7 @@ public class Event_Details extends Activity{
          eventTimeTextViewText = (TextView)findViewById(R.id.event_time_label);
          
          
-         
+         // gets the file manager
          fileManager = new FileManager();
          
          
@@ -89,6 +100,8 @@ public class Event_Details extends Activity{
  				
  				listOfNamesArrayList.add(nameMinusBeginningAndEnd);
  				
+ 				
+ 				// this gets the position of the event
  				arrayPosition = listOfNamesArrayList.indexOf(position);
  				
  			}
@@ -232,6 +245,7 @@ public class Event_Details extends Activity{
     // deletes the json data that the user has selectedå
     public void deleteCurrentJson(){
     	
+    	JSONObject mainJSONObjectFinal = new JSONObject();
     	
     	try{
     		
@@ -240,15 +254,41 @@ public class Event_Details extends Activity{
  			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
  			
  			JSONObject newJSONArray = (JSONObject) mainJsonArray.getJSONObject(arrayPosition);
- 			
  			newJSONArray.remove(position);
  			
  			
+ 			String arrayToString = mainJsonArray.toString();
+ 			
+ 			Log.i("array contains", arrayToString.toString());
+ 			
+ 			// making sure that the empty object doesnt appear in the string 
+ 			// anywhere
+ 			if(arrayToString.contains(",{}")){
+ 				Log.i("contains ", ",{}");
+ 				arrayToString = arrayToString.replace(",{}","");
+ 				
+ 				fileManager.writeStringFile(this, "json.txt", "{\"main\":" + arrayToString + "}");
+ 			}else if(arrayToString.contains("{},")){
+ 				Log.i("contains ", "{},");
+ 				arrayToString = arrayToString.replace("{},", "");
+ 				
+ 				fileManager.writeStringFile(this, "json.txt", "{\"main\":" + arrayToString + "}");
+ 			}else if(arrayToString.contains("[{}]")){
+ 				Log.i("contains ", "[{}]");
+ 				Log.i("erasing the file", "yes");
+ 				
+ 				//File file = getApplication().getFileStreamPath("json.txt");
+ 				file.delete();
+ 				
+ 				//arrayToString = arrayToString.replace("[{}]", "");
+ 			}
+
+
  			
  			
     		
  			
- 			Log.i("event list without this one", mainJsonArray.toString());
+ 			//Log.i("event list without this one", mainJSONObjectFinal.toString());
     		
     	}catch(Exception e){
     		Log.e("error", e.getMessage().toString());

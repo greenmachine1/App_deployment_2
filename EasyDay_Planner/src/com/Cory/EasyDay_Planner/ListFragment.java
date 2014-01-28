@@ -73,7 +73,7 @@ public class ListFragment extends Fragment {
 		// getting the file json.txt
 		File file = getActivity().getFileStreamPath(fileName);
 		
-		//file.delete();
+		file.delete();
 		
 		// if it exists...
 		if(file.exists()){
@@ -178,9 +178,7 @@ public class ListFragment extends Fragment {
 				secondRowHash.put(nameMinusBeginningAndEnd, noteForEventString);
 				
 				
-				
-				
-				
+				// sets the icon color based on whats passed in via json
 				icon_color = res.getIdentifier(iconString, "drawable", _context.getPackageName());
 				
 				// declaring what my Events_List_Adapter will hold

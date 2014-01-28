@@ -254,13 +254,26 @@ public class Event_Details extends Activity{
     		JSONObject mainJsonObject = new JSONObject(jsonString);
  			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
  			
- 			JSONObject newJSON = (JSONObject) mainJsonArray.getJSONObject(arrayPosition).getJSONObject(position);
+ 			JSONObject newJSON = (JSONObject) mainJsonArray.getJSONObject(arrayPosition);
  			
+ 			// this contains the name
+ 			String nameOfJSON = mainJsonArray.getJSONObject(arrayPosition).names().toString();
  			
- 			// getting my icon String
- 			String iconString = newJSON.getString("icon");
+ 			// removing [ and ] from the name
+			String nameMinusBeginning = nameOfJSON.replace("[", "");
+			String nameMinusBeginningAndEnd = nameMinusBeginning.replace("]", "");
  			
- 			Log.i("array contains", iconString);
+ 			JSONObject iconReplacementString = newJSON.getJSONObject(position).put("icon", "stop_icon");
+ 			
+ 			mainJsonArray.put(arrayPosition, newJSON);
+ 			
+ 			Log.i("nameminus stuf", nameMinusBeginningAndEnd);
+ 			
+ 			Log.i("array contains", iconReplacementString.toString());
+ 			
+ 			Log.i("main array contains", "{\"main\":" + mainJsonArray.toString() + "}");
+ 			
+ 			fileManager.writeStringFile(this, "json.txt", "{\"main\":" + mainJsonArray.toString() + "}");
     		
     		
     		

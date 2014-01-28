@@ -133,7 +133,11 @@ public class Event_Details extends Activity{
         return true;
     }
     
- // Action bar selection handler
+    
+    
+    
+    
+    // Action bar selection handler
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
 		
@@ -160,6 +164,9 @@ public class Event_Details extends Activity{
     		
 			
     		return true;
+    		
+    		
+    		
     	
     	// what to do when the delete icon is selected
     	case R.id.delete_icon:
@@ -171,6 +178,8 @@ public class Event_Details extends Activity{
     		return true;
     		
     		
+    		
+    		
     	// what to do when the mark as done overflow is selected	
     	case R.id.mark_as_done_overflow:
     		
@@ -178,12 +187,16 @@ public class Event_Details extends Activity{
 			
     		return true;
     		
+    		
+    		
     		// what to do when the pause timer overflow is selected 
     	case R.id.pause_timer_overflow:
     		
     		Log.i("pause timer icon pressed", "True");
 			
     		return true;
+    		
+    		
     		
     		// what to do when the share overflow is selected 
     	case R.id.share_overflow:
@@ -210,8 +223,13 @@ public class Event_Details extends Activity{
     
     
     
-    // deletes the json data that the user has selected
-    // this doesnt actually work at the moment
+    
+    
+    
+    
+    
+    
+    // deletes the json data that the user has selectedå
     public void deleteCurrentJson(){
     	
     	
@@ -221,8 +239,16 @@ public class Event_Details extends Activity{
     		JSONObject mainJsonObject = new JSONObject(jsonString);
  			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
  			
-
+ 			JSONObject newJSONArray = (JSONObject) mainJsonArray.getJSONObject(arrayPosition);
+ 			
+ 			newJSONArray.remove(position);
+ 			
+ 			
+ 			
+ 			
     		
+ 			
+ 			Log.i("event list without this one", mainJsonArray.toString());
     		
     	}catch(Exception e){
     		Log.e("error", e.getMessage().toString());

@@ -39,8 +39,9 @@ public class Event_Details extends Activity{
 	
 	JSONObject nameOfEvent;
 	
-	JSONObject c;
+	ArrayList<String> listOfNamesArrayList = new ArrayList<String>();
 	
+	int arrayPosition;
 	
 	
 	@Override
@@ -72,48 +73,45 @@ public class Event_Details extends Activity{
  			JSONObject mainJsonObject = new JSONObject(jsonString);
  			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
  			
- 			
-
  			Log.i("main array", mainJsonArray.toString());
  			
  			
+ 			// getting the integer value 
  			for(int i = 0; i < mainJsonArray.length(); i++){
- 			
- 				c = mainJsonArray.getJSONObject(i);
  				
- 				JSONObject newName = c.getJSONObject(position);
+ 				JSONObject c = mainJsonArray.getJSONObject(i);
  				
- 				Log.i("object c", newName.toString());
+ 				String namesOfEvents = c.names().toString();
+ 				
+ 				// removing [ and ] from the name
+				String nameMinusBeginning = namesOfEvents.replace("[\"", "");
+				String nameMinusBeginningAndEnd = nameMinusBeginning.replace("\"]", "");
+ 				
+ 				listOfNamesArrayList.add(nameMinusBeginningAndEnd);
+ 				
+ 				arrayPosition = listOfNamesArrayList.indexOf(position);
  				
  			}
+
  			
- 			
- 			
- 			
- 			
- 				//Log.i("object c", c.toString());
- 				
-	 			//nameOfEvent = c.getJSONObject(position);
+ 			nameOfEvent = mainJsonArray.getJSONObject(arrayPosition).getJSONObject(position);
+
+	 		nameOfEventString = nameOfEvent.getString("name_of_event").toString();
+	 		noteForEventString = nameOfEvent.getString("note_for_event").toString();
+	 		categoryString = nameOfEvent.getString("category").toString();
+			alarmTime = nameOfEvent.getString("alarm_time").toString();
+ 			eventTime = nameOfEvent.getString("time_of_event").toString();
+	 				
+	 				
+	 		Log.i("name of event", nameOfEventString);
+	 		Log.i("note for event", noteForEventString);
+	 		Log.i("category", categoryString);
 	 			
-	 			Log.i("name of event", nameOfEvent.toString());
- 			
-	 				
-	 			nameOfEventString = nameOfEvent.getString("name_of_event").toString();
-	 			noteForEventString = nameOfEvent.getString("note_for_event").toString();
-	 			categoryString = nameOfEvent.getString("category").toString();
-	 			alarmTime = nameOfEvent.getString("alarm_time").toString();
-	 			eventTime = nameOfEvent.getString("time_of_event").toString();
-	 				
-	 				
-	 			Log.i("name of event", nameOfEventString);
-	 			Log.i("note for event", noteForEventString);
-	 			Log.i("category", categoryString);
-	 			
-	 			eventTextViewText.setText(nameOfEventString);
-	 			noteTextViewText.setText(noteForEventString);
-	 			categoryTextViewText.setText(categoryString);
-	 			alarmTextViewText.setText(alarmTime);
-	 			eventTimeTextViewText.setText(eventTime);
+	 		eventTextViewText.setText(nameOfEventString);
+	 		noteTextViewText.setText(noteForEventString);
+	 		categoryTextViewText.setText(categoryString);
+	 		alarmTextViewText.setText(alarmTime);
+	 		eventTimeTextViewText.setText(eventTime);
 	 			
  			
  				
@@ -223,19 +221,7 @@ public class Event_Details extends Activity{
     		JSONObject mainJsonObject = new JSONObject(jsonString);
  			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
  			
- 			
- 			// need to remove this object from the list
- 			// problem though, the position isnt always going to be the exact object
- 			// to remove.
- 			//JSONObject nameOfEvent = mainJsonArray.getJSONObject(position).getJSONObject("" + position);
- 			
- 			//Log.i("name of event", nameOfEvent.toString());
 
- 			
- 			
- 			
- 			//JSONObject nameOfEvent = (JSONObject) c.remove("" + position);
- 			//JSONObject nameOfEvent = c.getJSONObject("" + position);
     		
     		
     	}catch(Exception e){

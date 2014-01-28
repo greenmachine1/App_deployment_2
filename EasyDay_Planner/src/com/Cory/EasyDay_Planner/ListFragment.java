@@ -138,7 +138,6 @@ public class ListFragment extends Fragment {
 				JSONObject c = mainJsonArray.getJSONObject(i);
 				
 				
-				
 				// amazing! Figured out how to grab the name!
 				String nameOfEventStringThing = c.names().toString();
 			

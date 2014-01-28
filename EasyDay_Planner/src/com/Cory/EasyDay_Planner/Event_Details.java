@@ -200,6 +200,7 @@ public class Event_Details extends Activity{
     		
     		Log.i("mark as done icon pressed", "True");
 			
+    		markAsDoneMethod();
     		
     		finish();
     		return true;
@@ -242,6 +243,36 @@ public class Event_Details extends Activity{
     
     
     
+    // gets the current event and overrides the 
+    // icon and sets it to a different color
+    public void markAsDoneMethod(){
+    	
+    	
+    	try{
+    		
+    		
+    		JSONObject mainJsonObject = new JSONObject(jsonString);
+ 			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+ 			
+ 			JSONObject newJSON = (JSONObject) mainJsonArray.getJSONObject(arrayPosition).getJSONObject(position);
+ 			
+ 			
+ 			// getting my icon String
+ 			String iconString = newJSON.getString("icon");
+ 			
+ 			Log.i("array contains", iconString);
+    		
+    		
+    		
+    	}catch(Exception e){
+    		
+    	}
+    	
+    	
+    	
+    	
+    	
+    }
     
     
     

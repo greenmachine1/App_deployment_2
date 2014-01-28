@@ -73,7 +73,7 @@ public class ListFragment extends Fragment {
 		// getting the file json.txt
 		File file = getActivity().getFileStreamPath(fileName);
 		
-		file.delete();
+		//file.delete();
 		
 		// if it exists...
 		if(file.exists()){

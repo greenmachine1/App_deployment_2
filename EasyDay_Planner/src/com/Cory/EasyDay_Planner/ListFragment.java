@@ -50,15 +50,20 @@ public class ListFragment extends Fragment {
 	
 	ArrayList<Events_List_Adapter> items = new ArrayList<Events_List_Adapter>(); 
 	
-
+	Resources res;
+	
+	int icon_color;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
+		_context = getActivity();
 		
-		
+		// this is for changing my icons
+		res = this.getResources();
+
 		// setting my file manager
 		fileManager = new FileManager();
 		
@@ -68,7 +73,7 @@ public class ListFragment extends Fragment {
 		// getting the file json.txt
 		File file = getActivity().getFileStreamPath(fileName);
 		
-		//file.delete();
+		file.delete();
 		
 		// if it exists...
 		if(file.exists()){
@@ -78,7 +83,7 @@ public class ListFragment extends Fragment {
 
 		// ... and if it doesnt	
 		}else if(!(file.exists())){
-			Log.i("no file exists", "true");
+
 			adapter.notifyDataSetChanged();
 		}
 
@@ -162,7 +167,9 @@ public class ListFragment extends Fragment {
 				String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
 				String noteForEventString = nameOfEvent.getString("note_for_event").toString();
 				String categoryForEventString = nameOfEvent.getString("category").toString();
-				String iconInteger = nameOfEvent.getString("icon").toString();
+				String iconString = nameOfEvent.getString("icon").toString();
+				
+				Log.i("icon string", iconString);
 				
 				// decides which category it is
 				decideWhichCategory(categoryForEventString);
@@ -172,9 +179,13 @@ public class ListFragment extends Fragment {
 				
 				
 				
+				
+				
+				icon_color = res.getIdentifier(iconString, "drawable", _context.getPackageName());
+				
 				// declaring what my Events_List_Adapter will hold
 				// this needs to have an array for the icon as well
-				Events_List_Adapter item = new Events_List_Adapter(R.drawable.stop_icon, firstRowHash.get(nameMinusBeginningAndEnd).toString(), secondRowHash.get(nameMinusBeginningAndEnd).toString());
+				Events_List_Adapter item = new Events_List_Adapter(icon_color, firstRowHash.get(nameMinusBeginningAndEnd).toString(), secondRowHash.get(nameMinusBeginningAndEnd).toString());
 					
 				// adding that to items
 				items.add(item);

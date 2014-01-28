@@ -280,7 +280,7 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 					// activity
 					// from the event details, the user can select
 					// mark as done, which will change this icon to "stop_icon"
-					jsonObject.put("icon", "Go");
+					jsonObject.put("icon", "go_icon");
 					
 					// putting all the elements into a json object...
 					nameOfJsonObject.put(nameOfEvent.getText().toString(), jsonObject);
@@ -300,11 +300,12 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 				}catch(Exception e){
 					Log.e("error", e.getMessage().toString());
 				}
-				
-			
-				// writing it all to a file
-				newFileManager.writeStringFile(this, fileName, mainObject.toString());
-				
+
+				// writing to file
+				if(!(nameOfEvent.getText().toString().isEmpty())){
+					
+					newFileManager.writeStringFile(this, fileName, mainObject.toString());
+				}
 				
 				
 				
@@ -323,7 +324,7 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 					// activity
 					// from the event details, the user can select
 					// mark as done, which will change this icon to "stop_icon"
-					jsonObject.put("icon", "Go");
+					jsonObject.put("icon", "go_icon");
 					
 
 					
@@ -347,8 +348,12 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 					Log.e("error", e.getMessage().toString());
 				}
 
-				// writing it all to a file				
-				newFileManager.writeStringFile(this, fileName, mainObject.toString());
+				// writing it all to a file	
+				
+				if(!(nameOfEvent.getText().toString().isEmpty())){
+					
+					newFileManager.writeStringFile(this, fileName, mainObject.toString());
+				}
 				
 			}
 		

@@ -188,6 +188,8 @@ public class Event_Details extends Activity{
     		
     		deleteCurrentJson();
     		
+    		finish();
+    		
     		return true;
     		
     		
@@ -198,6 +200,8 @@ public class Event_Details extends Activity{
     		
     		Log.i("mark as done icon pressed", "True");
 			
+    		
+    		finish();
     		return true;
     		
     		
@@ -207,6 +211,8 @@ public class Event_Details extends Activity{
     		
     		Log.i("pause timer icon pressed", "True");
 			
+    		
+    		finish();
     		return true;
     		
     		
@@ -242,13 +248,11 @@ public class Event_Details extends Activity{
     
     
     
-    // deletes the json data that the user has selectedå
+    // deletes the json data that the user has selected
     public void deleteCurrentJson(){
     	
-    	JSONObject mainJSONObjectFinal = new JSONObject();
-    	
+    	// gathers the json data
     	try{
-    		
     		
     		JSONObject mainJsonObject = new JSONObject(jsonString);
  			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
@@ -256,45 +260,40 @@ public class Event_Details extends Activity{
  			JSONObject newJSONArray = (JSONObject) mainJsonArray.getJSONObject(arrayPosition);
  			newJSONArray.remove(position);
  			
- 			
+ 			// converts it to a string so we can pick through it
  			String arrayToString = mainJsonArray.toString();
  			
  			Log.i("array contains", arrayToString.toString());
  			
- 			// making sure that the empty object doesnt appear in the string 
+ 			// making sure that the empty object doesn't appear in the string 
  			// anywhere
  			if(arrayToString.contains(",{}")){
- 				Log.i("contains ", ",{}");
+ 				
  				arrayToString = arrayToString.replace(",{}","");
  				
+ 				// Over writing the main file
  				fileManager.writeStringFile(this, "json.txt", "{\"main\":" + arrayToString + "}");
+ 				
  			}else if(arrayToString.contains("{},")){
- 				Log.i("contains ", "{},");
+
  				arrayToString = arrayToString.replace("{},", "");
  				
+ 				// Over writing the main file
  				fileManager.writeStringFile(this, "json.txt", "{\"main\":" + arrayToString + "}");
+ 				
+ 			// this one deletes the file	
  			}else if(arrayToString.contains("[{}]")){
  				Log.i("contains ", "[{}]");
  				Log.i("erasing the file", "yes");
  				
- 				//File file = getApplication().getFileStreamPath("json.txt");
+ 				// delete the file.  Dont want artifacts to be left over
  				file.delete();
  				
- 				//arrayToString = arrayToString.replace("[{}]", "");
  			}
-
-
- 			
- 			
-    		
- 			
- 			//Log.i("event list without this one", mainJSONObjectFinal.toString());
     		
     	}catch(Exception e){
     		Log.e("error", e.getMessage().toString());
     	}
-    	
-    	
-    	
+
     }
 }

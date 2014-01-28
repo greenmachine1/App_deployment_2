@@ -14,6 +14,8 @@ import com.Cory.FileManager.FileManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -54,7 +56,9 @@ public class ListFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-	
+		
+		
+		
 		// setting my file manager
 		fileManager = new FileManager();
 		
@@ -158,6 +162,7 @@ public class ListFragment extends Fragment {
 				String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
 				String noteForEventString = nameOfEvent.getString("note_for_event").toString();
 				String categoryForEventString = nameOfEvent.getString("category").toString();
+				String iconInteger = nameOfEvent.getString("icon").toString();
 				
 				// decides which category it is
 				decideWhichCategory(categoryForEventString);
@@ -168,7 +173,8 @@ public class ListFragment extends Fragment {
 				
 				
 				// declaring what my Events_List_Adapter will hold
-				Events_List_Adapter item = new Events_List_Adapter(R.drawable.go_icon, firstRowHash.get(nameMinusBeginningAndEnd).toString(), secondRowHash.get(nameMinusBeginningAndEnd).toString());
+				// this needs to have an array for the icon as well
+				Events_List_Adapter item = new Events_List_Adapter(R.drawable.stop_icon, firstRowHash.get(nameMinusBeginningAndEnd).toString(), secondRowHash.get(nameMinusBeginningAndEnd).toString());
 					
 				// adding that to items
 				items.add(item);

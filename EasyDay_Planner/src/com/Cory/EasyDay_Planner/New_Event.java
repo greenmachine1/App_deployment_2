@@ -226,6 +226,8 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
     		
     		// writing everything to json format
     		writeJson();
+    		
+    		finish();
 
     		return true;
 
@@ -278,7 +280,7 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 					// activity
 					// from the event details, the user can select
 					// mark as done, which will change this icon to "stop_icon"
-					jsonObject.put("icon", "go_icon");
+					jsonObject.put("icon", "Go");
 					
 					// putting all the elements into a json object...
 					nameOfJsonObject.put(nameOfEvent.getText().toString(), jsonObject);
@@ -321,7 +323,7 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 					// activity
 					// from the event details, the user can select
 					// mark as done, which will change this icon to "stop_icon"
-					jsonObject.put("icon", "go_icon");
+					jsonObject.put("icon", "Go");
 					
 
 					

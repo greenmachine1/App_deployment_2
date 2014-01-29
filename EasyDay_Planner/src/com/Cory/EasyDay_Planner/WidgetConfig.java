@@ -182,7 +182,7 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 				RemoteViews remoteView = new RemoteViews(this.getPackageName(), R.layout.widget_layout);
 				
 				// targetting my text in the widget
-				remoteView.setTextViewText(R.id.widget_text, "poop");
+				remoteView.setTextViewText(R.id.widget_text, widgetMainEventsHashMap.get("0").toString());
 				
 				
 				AppWidgetManager.getInstance(this).updateAppWidget(widgetId, remoteView);

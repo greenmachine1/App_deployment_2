@@ -18,6 +18,12 @@
     	<item>Other</item>    
         
     </string-array>
+    <string-array name="widget_category_list">
+        <item>Name of Event / Category / Event Time</item>
+        <item>Name of Event / Event Time</item>
+        <item>Name of Event / Category</item>
+        
+    </string-array>
     
 
 </resources>

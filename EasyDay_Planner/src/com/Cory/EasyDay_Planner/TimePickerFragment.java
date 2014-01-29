@@ -16,8 +16,7 @@ public class TimePickerFragment extends DialogFragment{
 	public interface TimePickerDialog {
 		
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute);
-		//public void onTimeSet(android.widget.TimePicker view, int hourOfDay,
-			//	int minute);
+
 	}
 	
 	TimePickerDialog mListener;

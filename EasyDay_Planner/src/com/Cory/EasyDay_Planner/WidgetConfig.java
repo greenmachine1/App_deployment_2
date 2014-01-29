@@ -1,11 +1,13 @@
 package com.Cory.EasyDay_Planner;
 
 import java.io.File;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -30,6 +32,11 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 	JSONArray mainJSONArray;
 	
 	Context context;
+	
+	String finalStringForWidget;
+	
+	// creating a hash map for my widget events
+	HashMap<String, String> widgetMainEventsHashMap = new HashMap<String, String>();
 
 
 	@Override
@@ -41,27 +48,7 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
          context = this;
          
          fileManager = new FileManager();
-         
-         // checking to make sure the file exists
-         File file = this.getFileStreamPath("json.txt");
-         if(file.exists()){
-        	 Log.i("this file exists", "yes");
-        	 
-        	String mainJsonString = fileManager.readStringFile(this, "json.txt");
-        	 
-        	 try {
-				mainJSONObject = new JSONObject(mainJsonString);
-				
-				Log.i("main json object", mainJSONObject.toString());
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-         }
-         else if(!(file.exists())){
-        	 Log.i("File does not exist", "nope");
-         }
+
 
          
          
@@ -72,12 +59,129 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
          
          
 	}
+	
+	
+	
+	public void getJSONInfo(int position){
+		
+		// checking to make sure the file exists
+        File file = this.getFileStreamPath("json.txt");
+        if(file.exists()){
+       	 Log.i("this file exists", "yes");
+       	 
+       	String mainJsonString = fileManager.readStringFile(this, "json.txt");
+       	 
+       	 try {
+				mainJSONObject = new JSONObject(mainJsonString);
+				
+				Log.i("main json object", mainJSONObject.toString());
+				
+				mainJSONArray = mainJSONObject.getJSONArray("main");
+				
+				Log.i("main json Array", mainJSONArray.toString());
+				
+				for(int i = 0; i < mainJSONArray.length(); i ++){
+					
+					JSONObject c = mainJSONArray.getJSONObject(i);
+					
+					
+					// amazing! Figured out how to grab the name!
+					String nameOfEventStringThing = c.names().toString();
+				
+					// removing [ and ] from the name
+					String nameMinusBeginning = nameOfEventStringThing.replace("[\"", "");
+					String nameMinusBeginningAndEnd = nameMinusBeginning.replace("\"]", "");
+
+					
+					// using the name to get the next event
+					JSONObject nameOfEvent = c.getJSONObject(nameMinusBeginningAndEnd);
+					
+					// deciding what info gets injected into my hash map
+					// name of event, category, event time
+					if(position == 0){
+						
+						String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
+						String categoryForEventString = nameOfEvent.getString("category").toString();
+						String timeOfEventString = nameOfEvent.getString("time_of_event").toString();
+						
+						finalStringForWidget = nameOfEventString + " " + categoryForEventString + " " + timeOfEventString;
+
+					// name of event, event time	
+					}else if (position == 1){
+						
+						String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
+						String timeOfEventString = nameOfEvent.getString("time_of_event").toString();
+						
+						finalStringForWidget = nameOfEventString + " " + timeOfEventString;
+						
+					// name of event, category	
+					}else if (position == 2){
+					
+						String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
+						String categoryForEventString = nameOfEvent.getString("category").toString();
+						
+						finalStringForWidget = nameOfEventString + " " + categoryForEventString;
+						
+					}
+					
+					Log.i("final widget String", finalStringForWidget);
+				}
+				
+				
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        else if(!(file.exists())){
+       	 Log.i("File does not exist", "nope");
+        }
+		
+		
+		
+		
+		
+	}
 
 	// call back from dialog box
 	@Override
 	public void onItemClickFromDialog(DialogFragment dialog, int whichItem) {
 		// TODO Auto-generated method stub
 		Log.i("item clicked", "" + whichItem);
+		
+		Bundle extras = getIntent().getExtras();
+		
+		
+		// testing to see if this loads properly
+		getJSONInfo(whichItem);
+		
+		if(extras != null){
+			
+			// gettin back the widget id
+			int widgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, 
+					AppWidgetManager.INVALID_APPWIDGET_ID);
+			
+			if(widgetId != AppWidgetManager.INVALID_APPWIDGET_ID){
+				
+				
+				
+			}
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 }

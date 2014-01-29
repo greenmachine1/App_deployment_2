@@ -105,6 +105,7 @@ public class MainActivity extends FragmentActivity {
     		
     		Intent aboutThisAppIntent = new Intent(_context, WidgetConfig.class);
 			startActivity(aboutThisAppIntent);
+
 			
     		return true;
     		

@@ -32,6 +32,8 @@ public class TimePickerFragment extends DialogFragment{
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
                     + " must implement NoticeDialogListener");
+            
+            
         }
     }
 

@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import com.Cory.FileManager.FileManager;
 
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -58,6 +59,8 @@ public class ListFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		
+		
 		
 		_context = getActivity();
 		

@@ -44,6 +44,8 @@ public class Event_Details extends Activity{
 	
 	JSONObject nameOfEvent;
 	
+	JSONObject mainJsonObject;
+	JSONArray mainJsonArray;
 	
 	
 	ArrayList<String> listOfNamesArrayList = new ArrayList<String>();
@@ -56,6 +58,7 @@ public class Event_Details extends Activity{
     	 super.onCreate(savedInstanceState);
     	 
     	 file = this.getFileStreamPath("json.txt");
+    	 
     	 
     	 // calling on my list view fragment
          setContentView(R.layout.event_details);
@@ -81,8 +84,8 @@ public class Event_Details extends Activity{
 
  		try{
  			
- 			JSONObject mainJsonObject = new JSONObject(jsonString);
- 			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+ 			mainJsonObject = new JSONObject(jsonString);
+ 			mainJsonArray = mainJsonObject.getJSONArray("main");
  			
  			Log.i("main array", mainJsonArray.toString());
  			
@@ -251,8 +254,8 @@ public class Event_Details extends Activity{
     	try{
     		
     		
-    		JSONObject mainJsonObject = new JSONObject(jsonString);
- 			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+    		mainJsonObject = new JSONObject(jsonString);
+ 			mainJsonArray = mainJsonObject.getJSONArray("main");
  			
  			JSONObject newJSON = (JSONObject) mainJsonArray.getJSONObject(arrayPosition);
  			
@@ -298,8 +301,8 @@ public class Event_Details extends Activity{
     	// gathers the json data
     	try{
     		
-    		JSONObject mainJsonObject = new JSONObject(jsonString);
- 			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+    		mainJsonObject = new JSONObject(jsonString);
+ 			mainJsonArray = mainJsonObject.getJSONArray("main");
  			
  			JSONObject newJSONArray = (JSONObject) mainJsonArray.getJSONObject(arrayPosition);
  			newJSONArray.remove(position);
@@ -340,4 +343,21 @@ public class Event_Details extends Activity{
     	}
 
     }
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		
+		nameOfEvent = null;
+		
+		listOfNamesArrayList = null;
+	}
+
+
+    
+    
+    
 }
+
+

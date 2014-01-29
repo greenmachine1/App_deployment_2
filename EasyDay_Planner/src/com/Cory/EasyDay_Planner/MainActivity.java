@@ -6,6 +6,7 @@ import com.Cory.EasyDay_Planner.R;
 
 import android.os.Bundle;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;

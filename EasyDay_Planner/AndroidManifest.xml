@@ -27,7 +27,17 @@
         <activity android:name="About_This_App"
             android:label="About"/>
         <activity android:name="Event_Details"
-            android:label="Event Details"></activity>
+            android:label="Event Details"/>
+        
+        <activity android:name="WidgetConfig"
+            android:label="Configure EasyDay Planner Widget">
+            
+            <intent-filter>
+                
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+                
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

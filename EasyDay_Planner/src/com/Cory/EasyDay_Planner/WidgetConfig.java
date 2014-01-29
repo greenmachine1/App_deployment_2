@@ -9,11 +9,13 @@ import org.json.JSONObject;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.widget.RemoteViews;
 
 import com.Cory.EasyDay_Planner.Custom_Dialog_ListView.Custom_Dialog_ListView_Listener;
 import com.Cory.FileManager.FileManager;
@@ -176,7 +178,19 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 			
 			if(widgetId != AppWidgetManager.INVALID_APPWIDGET_ID){
 				
+				// setting things up in the remote view (widget)
+				RemoteViews remoteView = new RemoteViews(this.getPackageName(), R.layout.widget_layout);
 				
+				// targetting my text in the widget
+				remoteView.setTextViewText(R.id.widget_text, "poop");
+				
+				
+				AppWidgetManager.getInstance(this).updateAppWidget(widgetId, remoteView);
+				
+				Intent resultValue = new Intent();
+				resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+				setResult(RESULT_OK, resultValue);
+				finish();
 				
 				
 			}

@@ -98,14 +98,14 @@ public class MainActivity extends FragmentActivity {
     	// what to do when the about this app overflow is selected	
     	case R.id.about_this_app_overflow:
     		
-    		/*
+    		
     		Intent aboutThisAppIntent = new Intent(_context, About_This_App.class);
 			startActivity(aboutThisAppIntent);
-			*/
-    		
+			
+    		/*
     		Intent aboutThisAppIntent = new Intent(_context, WidgetConfig.class);
 			startActivity(aboutThisAppIntent);
-
+			*/
 			
     		return true;
     		

@@ -35,8 +35,11 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 	
 	String finalStringForWidget;
 	
+	String iconDrawableString;
+	
 	// creating a hash map for my widget events
 	HashMap<String, String> widgetMainEventsHashMap = new HashMap<String, String>();
+	HashMap<String, String> iconHashMap = new HashMap<String, String>();
 
 
 	@Override
@@ -49,15 +52,10 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
          
          fileManager = new FileManager();
 
-
-         
-         
-         
          // launching the custom dialog
          Custom_Dialog_ListView customDialogListView = new Custom_Dialog_ListView();
          customDialogListView.show(fm, "ListViewFrag");
-         
-         
+
 	}
 	
 	
@@ -74,11 +72,11 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
        	 try {
 				mainJSONObject = new JSONObject(mainJsonString);
 				
-				Log.i("main json object", mainJSONObject.toString());
-				
 				mainJSONArray = mainJSONObject.getJSONArray("main");
+
+				widgetMainEventsHashMap.clear();
 				
-				Log.i("main json Array", mainJSONArray.toString());
+				iconHashMap.clear();
 				
 				for(int i = 0; i < mainJSONArray.length(); i ++){
 					
@@ -95,6 +93,8 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 					
 					// using the name to get the next event
 					JSONObject nameOfEvent = c.getJSONObject(nameMinusBeginningAndEnd);
+					
+					iconDrawableString = nameOfEvent.getString("icon");
 					
 					// deciding what info gets injected into my hash map
 					// name of event, category, event time
@@ -124,11 +124,14 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 						
 					}
 					
+					
+					// loading all of this into my hashmap
+					widgetMainEventsHashMap.put("" + i, finalStringForWidget);
+					iconHashMap.put("" + i, iconDrawableString);
+					
 					Log.i("final widget String", finalStringForWidget);
 				}
-				
-				
-				
+
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -152,9 +155,18 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 		
 		Bundle extras = getIntent().getExtras();
 		
-		
-		// testing to see if this loads properly
+		// getting my json data
 		getJSONInfo(whichItem);
+		
+		// getting an output of my widgetMainEventsHashMap
+		// and my icon hash
+		for(int j = 0; j < widgetMainEventsHashMap.size(); j++){
+			
+			Log.i("hash", widgetMainEventsHashMap.get("" + j).toString());
+			Log.i("icon hash", iconHashMap.get("" + j).toString());
+		}
+		
+
 		
 		if(extras != null){
 			
@@ -163,6 +175,7 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 					AppWidgetManager.INVALID_APPWIDGET_ID);
 			
 			if(widgetId != AppWidgetManager.INVALID_APPWIDGET_ID){
+				
 				
 				
 				

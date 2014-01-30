@@ -1,18 +1,15 @@
 package com.Cory.EasyDay_Planner;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.Cory.FileManager.FileManager;
-
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +21,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.Cory.FileManager.FileManager;
 
 public class New_Event extends FragmentActivity implements OnItemSelectedListener, TimePickerFragment.OnTimeSetListener{
 
@@ -54,6 +53,7 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 	int minuteFromPicker = 0;
 	
 	int positionFromEditActivity;
+	int arrayPosition;
 	
 	String nameOfEventFromEdit;
 	String noteForEventFromEdit;
@@ -61,39 +61,14 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 	String alarmTimeFromEdit;
 	String eventTimeFromEdit;
 
-
+	Bundle extras;
+	
+	ArrayList<String> arrayOfNames = new ArrayList<String>();
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	 super.onCreate(savedInstanceState);
     	 
-    	 getActionBar().setDisplayHomeAsUpEnabled(true);
-    	 
-    	 // getting my extras if this activity was called from an 
-    	 // edit
-    	 
-    	 Bundle extras = getIntent().getExtras();
-    	 
-    	 if(extras.getBoolean("from_main_activity") == false){
-    	 
-    		 positionFromEditActivity = extras.getInt("position");
-    		 nameOfEventFromEdit = extras.getString("name_of_event");
-    		 noteForEventFromEdit = extras.getString("note_for_event");
-    		 categoryForEventFromEdit = extras.getString("category");
-    		 alarmTimeFromEdit = extras.getString("alarm_time");
-    		 eventTimeFromEdit = extras.getString("event_time");
-    		 
-    		 
-    		 Log.i("position", "" + positionFromEditActivity);
-    		 Log.i("name", nameOfEventFromEdit);
-    		 Log.i("note", noteForEventFromEdit);
-    		 Log.i("category", categoryForEventFromEdit);
-    		 Log.i("alarm time", alarmTimeFromEdit);
-    		 Log.i("event time", eventTimeFromEdit);
-    		 
-    		 
-    		 
-    	 }
 
     	 _context = this;
     	 
@@ -112,6 +87,34 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
          nameOfEvent = (EditText)findViewById(R.id.event_name);
          noteText = (EditText)findViewById(R.id.event_note);
          
+
+    	 
+    	 // getting my extras if this activity was called from an 
+    	 // edit
+    	 extras = getIntent().getExtras();
+    	 
+    	 if(extras.getBoolean("from_main_activity") == false){
+    	 
+    		 positionFromEditActivity = extras.getInt("positionNumber");
+    		 nameOfEventFromEdit = extras.getString("name_of_event");
+    		 noteForEventFromEdit = extras.getString("note_for_event");
+    		 categoryForEventFromEdit = extras.getString("category");
+    		 alarmTimeFromEdit = extras.getString("alarm_time");
+    		 eventTimeFromEdit = extras.getString("event_time");
+    		 
+    		 
+    		 Log.i("position called from Edit", "" + positionFromEditActivity);
+    		 Log.i("name called from Edit", nameOfEventFromEdit);
+    		 Log.i("note called from Edit", noteForEventFromEdit);
+    		 Log.i("category called from Edit", categoryForEventFromEdit);
+    		 Log.i("alarm time called from Edit", alarmTimeFromEdit);
+    		 Log.i("event time called from Edit", eventTimeFromEdit);
+    		 
+    		 nameOfEvent.setText(nameOfEventFromEdit);
+    		 noteText.setText(noteForEventFromEdit);
+    		 
+    	 }
+
 
          // setting the alarm button click listener
          setAnAlarmButton.setOnClickListener(new OnClickListener(){
@@ -142,12 +145,7 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
 			}
         	 
          });
-         
-         
-         
-         
-         
-         
+
          // set category info
          categorySpinner = (Spinner)findViewById(R.id.category_spinner);
          
@@ -225,9 +223,28 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
     	case R.id.done_icon:
     		
     		// writing everything to json format
-    		writeJson();
+    		// if coming from the main activity, its ok to create new
+    		// json
+    		if(extras.getBoolean("from_main_activity") == true){
+    			writeJson();
+    			
+    			Log.i("from main activity", "writing json");
+    			finish();
+
+    		}else{
+    			
+    			Log.i("not from main", "not writing new json");
+    			/*
+    			Log.i("name", nameOfEvent.getText().toString());
+    			Log.i("name", noteText.getText().toString());
+				*/
+    			
+    			overWriteJsonData();
+    			
+    			finish();
+    		}
     		
-    		finish();
+    		
 
     		return true;
 
@@ -237,6 +254,64 @@ public class New_Event extends FragmentActivity implements OnItemSelectedListene
     	
     }
 	
+    
+    
+    public void overWriteJsonData(){
+    	
+    	
+    	String JSONString = newFileManager.readStringFile(_context, fileName);
+    	
+    	JSONObject outterLayerJsonObject = new JSONObject();
+		
+    	try{
+ 			
+    		
+ 			JSONObject mainJsonObject = new JSONObject(JSONString);
+ 			JSONArray mainJsonArray = mainJsonObject.getJSONArray("main");
+ 			
+ 			Log.i("main array", mainJsonArray.toString());
+ 			
+ 			arrayOfNames.clear();
+ 			
+ 			// getting the integer value 
+ 			for(int i = 0; i < mainJsonArray.length(); i++){
+ 				
+ 				JSONObject c = mainJsonArray.getJSONObject(i);
+ 				
+ 				String namesOfEvents = c.names().toString();
+ 				
+ 				// removing [ and ] from the name
+				String nameMinusBeginning = namesOfEvents.replace("[\"", "");
+				String nameMinusBeginningAndEnd = nameMinusBeginning.replace("\"]", "");
+ 				
+				arrayOfNames.add(nameMinusBeginningAndEnd);
+ 				
+ 				
+ 				// this gets the position of the event in ints
+ 				arrayPosition = arrayOfNames.indexOf(nameOfEventFromEdit);
+ 			}
+ 			
+ 			
+ 				JSONObject eventByName = mainJsonArray.getJSONObject(arrayPosition).getJSONObject(nameOfEventFromEdit);
+ 				
+ 				eventByName.put("name_of_event", nameOfEvent.getText().toString());
+ 				
+ 				outterLayerJsonObject.put(nameOfEvent.getText().toString(), eventByName);
+ 				
+ 				
+ 			
+ 				Log.i("modified", outterLayerJsonObject.toString());
+ 				
+ 			
+ 			
+ 		}catch(Exception e){
+ 			Log.e("error", e.getMessage().toString());
+ 		}
+    	
+    	
+    	
+    }
+    
 	
 	
     

@@ -37,7 +37,6 @@ public class JsonForWidget{
 	String iconDrawableString;
 	
 	// creating a hash map for my widget events
-	HashMap<String, String> widgetMainEventsHashMap = new HashMap<String, String>();
 	HashMap<String, String> iconHashMap = new HashMap<String, String>();
 	
 	ArrayList<String> newArrayList = new ArrayList<String>();
@@ -76,8 +75,6 @@ public class JsonForWidget{
 				mainJSONObject = new JSONObject(mainJsonString);
 				
 				mainJSONArray = mainJSONObject.getJSONArray("main");
-
-				widgetMainEventsHashMap.clear();
 				
 				iconHashMap.clear();
 				
@@ -129,11 +126,7 @@ public class JsonForWidget{
 						finalStringForWidget = nameOfEventString + " " + categoryForEventString;
 						
 					}
-					
-					
-					// loading all of this into my hashmap
-					widgetMainEventsHashMap.put("" + i, finalStringForWidget);
-					iconHashMap.put("" + i, iconDrawableString);
+
 					
 					newArrayList.add(finalStringForWidget);
 

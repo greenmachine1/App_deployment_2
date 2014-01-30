@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-        <ListView 
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/action_bar_blue" >
+
+    	<TextView
+            android:id="@+id/main_header_textview"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="20sp"
+            android:text="EasyDay Planner"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+        <ListView
             android:id="@+id/widget_listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:layout_gravity="center"
-            android:background="@color/blue">
+            android:background="@color/action_bar_blue" >
         </ListView>
         <TextView
             android:id="@+id/empty_textView"
@@ -18,4 +29,4 @@
         
 
 
-</FrameLayout>
+</LinearLayout>

@@ -29,11 +29,7 @@ public class MainActivity extends FragmentActivity {
         
         _context = this;
 
-        /*
-        JsonForWidget jsonForWidget = new JsonForWidget();
-        jsonForWidget.positionOfData(1);
-        jsonForWidget.loadJsonData(this);
-		*/
+
     }
 
     

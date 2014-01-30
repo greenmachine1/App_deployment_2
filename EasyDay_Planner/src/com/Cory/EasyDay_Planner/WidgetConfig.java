@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -44,6 +45,7 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 	HashMap<String, String> iconHashMap = new HashMap<String, String>();
 
 
+
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	 super.onCreate(savedInstanceState);
@@ -57,6 +59,7 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
          // launching the custom dialog
          Custom_Dialog_ListView customDialogListView = new Custom_Dialog_ListView();
          customDialogListView.show(fm, "ListViewFrag");
+         
 
 	}
 	
@@ -68,21 +71,12 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 	public void onItemClickFromDialog(DialogFragment dialog, int whichItem) {
 		// TODO Auto-generated method stub
 		Log.i("item clicked", "" + whichItem);
-		
-		Bundle extras = getIntent().getExtras();
-		
-		// getting my json data
-		//getJSONInfo(whichItem);
-		
-		// getting an output of my widgetMainEventsHashMap
-		// and my icon hash
-		for(int j = 0; j < widgetMainEventsHashMap.size(); j++){
-			
-			Log.i("hash", widgetMainEventsHashMap.get("" + j).toString());
-			Log.i("icon hash", iconHashMap.get("" + j).toString());
-		}
-		
 
+        Intent intent = getIntent();
+
+        Bundle extras = intent.getExtras();
+
+        
 		
 		if(extras != null){
 			
@@ -101,21 +95,26 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 				jsonForWidget.positionOfData(whichItem);
 				jsonForWidget.loadJsonData(this);
 				
-				Log.i("ArrayList from json", jsonForWidget.returnedString().toString());
+				int countOfWidgets = jsonForWidget.returnedString().size();
 				
+				
+				
+				Log.i("ArrayList from json", jsonForWidget.returnedString().toString() + "" + countOfWidgets);
+
+				
+				AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
 				
 				
 				// setting things up in the remote view (widget)
 				RemoteViews remoteView = new RemoteViews(this.getPackageName(), R.layout.widget_layout);
 				
-				// targetting my text in the widget
-				remoteView.setTextViewText(R.id.empty_textView, jsonForWidget.returnedString().get(0).toString());
-				
-				
-				AppWidgetManager.getInstance(this).updateAppWidget(widgetId, remoteView);
-				
+				appWidgetManager.updateAppWidget(widgetId, remoteView);
+
 				Intent resultValue = new Intent();
+				
 				resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+				
+
 				setResult(RESULT_OK, resultValue);
 				
 

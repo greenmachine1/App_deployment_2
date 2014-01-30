@@ -56,15 +56,7 @@ public class Event_Details extends Activity{
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	 super.onCreate(savedInstanceState);
-    	 
-    	 
-    	 /* test for my json data
-    	 JsonForWidget newJsonForWidget = new JsonForWidget();
-    	 newJsonForWidget.loadJsonData(this);
-    	 
-    	 Log.i("newJSONForWidget", newJsonForWidget.returnedString().toString());
-		*/
-    	 
+
     	 file = this.getFileStreamPath("json.txt");
     	 
     	 
@@ -177,12 +169,13 @@ public class Event_Details extends Activity{
     		Intent addEventIntent = new Intent(this, New_Event.class);
     		
     		addEventIntent.putExtra("from_main_activity", false);
-    		addEventIntent.putExtra("position", position);
+    		addEventIntent.putExtra("positionNumber", position);
     		addEventIntent.putExtra("name_of_event", nameOfEventString);
     		addEventIntent.putExtra("note_for_event", noteForEventString);
     		addEventIntent.putExtra("category", categoryString);
     		addEventIntent.putExtra("alarm_time", alarmTime);
     		addEventIntent.putExtra("event_time", eventTime);
+
     		
 			startActivity(addEventIntent);
     		

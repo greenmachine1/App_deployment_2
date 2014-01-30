@@ -28,9 +28,12 @@ public class MainActivity extends FragmentActivity {
          setContentView(R.layout.main);
         
         _context = this;
-        
-        
 
+        /*
+        JsonForWidget jsonForWidget = new JsonForWidget();
+        jsonForWidget.positionOfData(1);
+        jsonForWidget.loadJsonData(this);
+		*/
     }
 
     

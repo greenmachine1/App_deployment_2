@@ -57,6 +57,14 @@ public class Event_Details extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
     	 super.onCreate(savedInstanceState);
     	 
+    	 
+    	 /* test for my json data
+    	 JsonForWidget newJsonForWidget = new JsonForWidget();
+    	 newJsonForWidget.loadJsonData(this);
+    	 
+    	 Log.i("newJSONForWidget", newJsonForWidget.returnedString());
+		*/
+    	 
     	 file = this.getFileStreamPath("json.txt");
     	 
     	 

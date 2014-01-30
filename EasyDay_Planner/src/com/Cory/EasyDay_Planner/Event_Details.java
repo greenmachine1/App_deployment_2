@@ -62,7 +62,7 @@ public class Event_Details extends Activity{
     	 JsonForWidget newJsonForWidget = new JsonForWidget();
     	 newJsonForWidget.loadJsonData(this);
     	 
-    	 Log.i("newJSONForWidget", newJsonForWidget.returnedString());
+    	 Log.i("newJSONForWidget", newJsonForWidget.returnedString().toString());
 		*/
     	 
     	 file = this.getFileStreamPath("json.txt");

@@ -62,92 +62,6 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 	
 	
 	
-	public void getJSONInfo(int position){
-		
-		// checking to make sure the file exists
-        File file = this.getFileStreamPath("json.txt");
-        if(file.exists()){
-       	 Log.i("this file exists", "yes");
-       	 
-       	String mainJsonString = fileManager.readStringFile(this, "json.txt");
-       	 
-       	 try {
-				mainJSONObject = new JSONObject(mainJsonString);
-				
-				mainJSONArray = mainJSONObject.getJSONArray("main");
-
-				widgetMainEventsHashMap.clear();
-				
-				iconHashMap.clear();
-				
-				for(int i = 0; i < mainJSONArray.length(); i ++){
-					
-					JSONObject c = mainJSONArray.getJSONObject(i);
-					
-					
-					// amazing! Figured out how to grab the name!
-					String nameOfEventStringThing = c.names().toString();
-				
-					// removing [ and ] from the name
-					String nameMinusBeginning = nameOfEventStringThing.replace("[\"", "");
-					String nameMinusBeginningAndEnd = nameMinusBeginning.replace("\"]", "");
-
-					
-					// using the name to get the next event
-					JSONObject nameOfEvent = c.getJSONObject(nameMinusBeginningAndEnd);
-					
-					iconDrawableString = nameOfEvent.getString("icon");
-					
-					// deciding what info gets injected into my hash map
-					// name of event, category, event time
-					if(position == 0){
-						
-						String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
-						String categoryForEventString = nameOfEvent.getString("category").toString();
-						String timeOfEventString = nameOfEvent.getString("time_of_event").toString();
-						
-						finalStringForWidget = nameOfEventString + " " + categoryForEventString + " " + timeOfEventString;
-
-					// name of event, event time	
-					}else if (position == 1){
-						
-						String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
-						String timeOfEventString = nameOfEvent.getString("time_of_event").toString();
-						
-						finalStringForWidget = nameOfEventString + " " + timeOfEventString;
-						
-					// name of event, category	
-					}else if (position == 2){
-					
-						String nameOfEventString = nameOfEvent.getString("name_of_event").toString();
-						String categoryForEventString = nameOfEvent.getString("category").toString();
-						
-						finalStringForWidget = nameOfEventString + " " + categoryForEventString;
-						
-					}
-					
-					
-					// loading all of this into my hashmap
-					widgetMainEventsHashMap.put("" + i, finalStringForWidget);
-					iconHashMap.put("" + i, iconDrawableString);
-					
-					Log.i("final widget String", finalStringForWidget);
-				}
-
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }
-        else if(!(file.exists())){
-       	 Log.i("File does not exist", "nope");
-        }
-		
-		
-		
-		
-		
-	}
 
 	// call back from dialog box
 	@Override
@@ -158,7 +72,7 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 		Bundle extras = getIntent().getExtras();
 		
 		// getting my json data
-		getJSONInfo(whichItem);
+		//getJSONInfo(whichItem);
 		
 		// getting an output of my widgetMainEventsHashMap
 		// and my icon hash
@@ -178,11 +92,24 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 			
 			if(widgetId != AppWidgetManager.INVALID_APPWIDGET_ID){
 				
+				
+				// calls on the JsonForWidget class which loads up
+				// my json data.  It passes in the location of the 
+				// listview and passes it in
+				
+				JsonForWidget jsonForWidget = new JsonForWidget();
+				jsonForWidget.positionOfData(whichItem);
+				jsonForWidget.loadJsonData(this);
+				
+				Log.i("ArrayList from json", jsonForWidget.returnedString().toString());
+				
+				
+				
 				// setting things up in the remote view (widget)
 				RemoteViews remoteView = new RemoteViews(this.getPackageName(), R.layout.widget_layout);
 				
 				// targetting my text in the widget
-				//remoteView.setTextViewText(R.id.empty_textView, widgetMainEventsHashMap.get("0").toString());
+				remoteView.setTextViewText(R.id.empty_textView, jsonForWidget.returnedString().get(0).toString());
 				
 				
 				AppWidgetManager.getInstance(this).updateAppWidget(widgetId, remoteView);
@@ -191,9 +118,7 @@ public class WidgetConfig extends FragmentActivity implements Custom_Dialog_List
 				resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
 				setResult(RESULT_OK, resultValue);
 				
-				JsonForWidget jsonForWidget = new JsonForWidget();
-				jsonForWidget.positionOfData(0);
-				
+
 				
 				finish();
 				
